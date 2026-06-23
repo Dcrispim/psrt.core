@@ -1,0 +1,10 @@
+{
+  "slider": ["x", "y", "width", "text-size", "opacity"],
+  "color-picker": ["color", "background", "border-color", "backGround"],
+  "dropdown": {
+    "text-align": ["left", "center", "right", "justify"],
+    "font-weight": ["400", "500", "600", "700"],
+    "font-style": ["normal", "italic"]
+  },
+  "text-area": ["content"]
+}

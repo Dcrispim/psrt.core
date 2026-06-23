@@ -1,0 +1,204 @@
+/* Utility classes used by ImagePsrt (subset of Tailwind) */
+.preview-web .relative {
+  position: relative;
+}
+
+.preview-web .absolute {
+  position: absolute;
+}
+
+.preview-web .w-full {
+  width: 100%;
+}
+
+.preview-web .h-full {
+  height: 100%;
+}
+
+.preview-web .top-0 {
+  top: 0;
+}
+
+.preview-web .left-0 {
+  left: 0;
+}
+
+.preview-web .h-\[100\%\] {
+  height: 100%;
+}
+
+/* Footer / narrow preview */
+.preview-web {
+  width: 100%;
+  max-width: 280px;
+  margin: 0 auto;
+}
+
+.preview-web #psrt-image-container {
+  position: relative;
+  width: 100%;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #111;
+}
+
+.preview-web #image-container {
+  width: 100%;
+  line-height: 0;
+}
+
+.preview-web .psrt-page-image {
+  width: 100%;
+  height: auto;
+  display: block;
+  -webkit-user-drag: none;
+  user-select: none;
+}
+
+.preview-web #entries-container {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.preview-web .entry {
+  pointer-events: auto;
+  box-sizing: border-box;
+  line-height: 1.2;
+}
+
+.preview-web .entry .entry-text {
+  margin: 0;
+  line-height: inherit;
+  white-space: pre-wrap;
+  word-break: break-word;
+  min-width: 0;
+}
+
+.preview-web .entry .entry-text strong {
+  font-weight: bolder;
+}
+
+.preview-web .entry .entry-text em {
+  font-style: italic;
+}
+
+.preview-web .entry .entry-text u {
+  text-decoration: underline;
+}
+
+.preview-web .entry .entry-text s {
+  text-decoration: line-through;
+}
+
+/* Canvas WEB: slide at natural image size × zoom (not window size) */
+.preview-web-canvas {
+  width: auto;
+  max-width: none;
+  margin: 0;
+  flex: 0 0 auto;
+  display: block;
+}
+
+.preview-web-canvas #psrt-image-container.psrt-image-container--fixed-ref {
+  position: relative;
+  width: auto;
+  height: auto;
+  max-width: none;
+  overflow: hidden;
+  background: #111;
+  border-radius: 0;
+  flex-shrink: 0;
+}
+
+/* Before natural size is known: keep image in flow so it can load and measure */
+.preview-web-canvas #psrt-image-container.psrt-image-container--fixed-ref.psrt-image-container--sizing #image-container {
+  position: relative;
+  width: auto;
+  height: auto;
+  line-height: 0;
+}
+
+.preview-web-canvas
+  #psrt-image-container.psrt-image-container--fixed-ref.psrt-image-container--sizing
+  .psrt-page-image {
+  width: auto;
+  height: auto;
+  max-width: none;
+  display: block;
+  pointer-events: none;
+  -webkit-user-drag: none;
+}
+
+.preview-web-canvas #psrt-image-container.psrt-image-container--fixed-ref.psrt-image-container--sized #image-container {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.preview-web-canvas #psrt-image-container.psrt-image-container--fixed-ref.psrt-image-container--sized .psrt-page-image {
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+  display: block;
+  pointer-events: none;
+  -webkit-user-drag: none;
+  user-select: none;
+}
+
+.preview-web-canvas #psrt-image-container.psrt-image-container--fixed-ref #entries-container {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.preview-web-canvas #entries-container .entry {
+  pointer-events: auto;
+}
+
+.text-block--interaction-only {
+  color: transparent !important;
+  text-shadow: none !important;
+  -webkit-text-stroke-width: 0 !important;
+  background-color: transparent !important;
+}
+
+.canvas-stage .preview-web-canvas {
+  position: static;
+  width: auto;
+  height: auto;
+}
+
+.canvas-editor-stage {
+  position: relative;
+  display: inline-block;
+  line-height: 0;
+}
+
+.canvas-text-overlay {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  container-type: size;
+  container-name: slide;
+  z-index: 2;
+}
+
+.canvas-text-overlay .text-block {
+  pointer-events: auto;
+}
+
+.preview-web-empty {
+  color: #a1a1aa;
+  font-size: 13px;
+  text-align: center;
+  padding: 24px;
+}

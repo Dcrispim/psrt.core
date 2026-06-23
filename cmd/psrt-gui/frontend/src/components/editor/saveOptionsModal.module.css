@@ -1,0 +1,328 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(6, 8, 12, 0.62);
+  backdrop-filter: blur(4px);
+  display: grid;
+  place-items: center;
+  z-index: 1000;
+  padding: 24px;
+  animation: fade 120ms ease-out;
+}
+@keyframes fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.dialog {
+  --bg: #0f1115;
+  --surface: #161a22;
+  --surface-2: #1c2230;
+  --surface-3: #232a3a;
+  --border: #262d3d;
+  --border-strong: #344058;
+  --text: #e6e8ee;
+  --muted: #8a93a6;
+  --accent: #1db954;
+  --accent-fg: #0a1a10;
+
+  width: 100%;
+  max-width: 460px;
+  background: linear-gradient(180deg, var(--surface) 0%, var(--bg) 100%);
+  border: 1px solid var(--border-strong);
+  border-radius: 14px;
+  box-shadow:
+    0 24px 60px -10px rgba(0, 0, 0, 0.7),
+    0 0 0 1px rgba(255, 255, 255, 0.02);
+  color: var(--text);
+  font:
+    13px/1.4 -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    Inter,
+    Roboto,
+    sans-serif;
+  overflow: hidden;
+  animation: pop 140ms ease-out;
+}
+.dialog *,
+.dialog *::before,
+.dialog *::after {
+  box-sizing: border-box;
+}
+@keyframes pop {
+  from {
+    opacity: 0;
+    transform: translateY(6px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--border);
+}
+.title {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.2px;
+}
+.close {
+  background: transparent;
+  border: 0;
+  color: var(--muted);
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+}
+.close:hover {
+  background: var(--surface-2);
+  color: var(--text);
+}
+
+.list {
+  list-style: none;
+  margin: 0;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.item {
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+  transition:
+    border-color 120ms,
+    background 120ms;
+}
+.itemOpen {
+  border-color: var(--border-strong);
+  background: var(--surface-3);
+}
+
+.itemHead {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 11px 14px;
+  background: transparent;
+  border: 0;
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+  font: inherit;
+}
+.itemHead:hover {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.itemMain {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  flex: 1;
+}
+.itemLabel {
+  font-size: 13px;
+  font-weight: 500;
+}
+.itemHint {
+  font-size: 11px;
+  color: var(--muted);
+  margin-top: 2px;
+}
+
+.itemRight {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--muted);
+}
+.badge {
+  min-width: 18px;
+  height: 18px;
+  padding: 0 6px;
+  border-radius: 9px;
+  background: var(--accent);
+  color: var(--accent-fg);
+  font-size: 11px;
+  font-weight: 600;
+  display: inline-grid;
+  place-items: center;
+}
+.chev {
+  display: inline-flex;
+  transition: transform 160ms ease;
+}
+.chevOpen {
+  transform: rotate(180deg);
+  color: var(--text);
+}
+
+.variantNote {
+  margin: 8px 0 0;
+  font-size: 11px;
+  color: var(--muted);
+  line-height: 1.4;
+}
+
+.body {
+  padding: 4px 14px 12px;
+  border-top: 1px dashed var(--border);
+  margin-top: 2px;
+  animation: slide 140ms ease-out;
+}
+@keyframes slide {
+  from {
+    opacity: 0;
+    transform: translateY(-2px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.files {
+  list-style: none;
+  margin: 10px 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.file {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 8px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 7px;
+  color: var(--text);
+  font-size: 12px;
+}
+.file > svg:first-child {
+  color: var(--muted);
+  flex-shrink: 0;
+}
+.fileName {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.fileSize {
+  color: var(--muted);
+  font-size: 11px;
+  font-variant-numeric: tabular-nums;
+}
+.fileRemove {
+  background: transparent;
+  border: 0;
+  color: var(--muted);
+  width: 22px;
+  height: 22px;
+  border-radius: 5px;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+}
+.fileRemove:hover {
+  background: var(--surface-3);
+  color: var(--text);
+}
+
+.actions {
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.variantBtn {
+  flex: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 8px 10px;
+  background: transparent;
+  border: 1px dashed var(--border-strong);
+  border-radius: 8px;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition:
+    color 120ms,
+    border-color 120ms,
+    background 120ms;
+}
+.variantBtn:hover {
+  color: var(--text);
+  border-color: var(--accent);
+  background: rgba(29, 185, 84, 0.06);
+}
+.fileInput {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.confirm {
+  padding: 8px 14px;
+  background: var(--accent);
+  color: var(--accent-fg);
+  border: 0;
+  border-radius: 8px;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  transition: filter 120ms;
+}
+.confirm:hover {
+  filter: brightness(1.08);
+}
+.confirmFull {
+  flex: 1;
+}
+
+.footer {
+  padding: 8px 10px 12px;
+  display: flex;
+  justify-content: center;
+  border-top: 1px solid var(--border);
+}
+.cancel {
+  background: transparent;
+  border: 0;
+  color: var(--muted);
+  padding: 8px 16px;
+  border-radius: 6px;
+  font: inherit;
+  cursor: pointer;
+}
+.cancel:hover {
+  color: var(--text);
+  background: var(--surface-2);
+}

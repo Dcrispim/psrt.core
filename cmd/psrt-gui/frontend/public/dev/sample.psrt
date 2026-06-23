@@ -1,0 +1,33 @@
+$START capa | {"backGround":"#0F0F14"} | file:///d%3A/projs/GO/psrt/grade_referencia.png
+>>50-50-84-1 | {"color":"#FFFFFF","fontWeight":"700"} | 0
+DailyTrack
+>>40-18-20-1 | {"color":"#ff0000","backgroundColor":"#000"} | 1
+Recomendação do dia
+>>8-78-84-1 | {"color":"#1DB954"} | 2
+Toque para ouvir
+$END capa
+$START mood-sexta | {"backGround":"#1C1C26"} | https://picsum.photos/seed/psrt-mood/1080/1920
+>>50-50-80-1 | {"color":"#FFFFFF"} | 0
+Energia de sexta
+>>10-22-80-1 | {"color":"#9146FF"} | 1 | https://picsum.photos/seed/psrt-inline/200/200
+Artista — Nome da faixa
+>>10-88-80-1 | {"color":"#A1A1AA"} | 2
+Spotify · Preview
+$END mood-sexta
+$START intro | {} | https://cdn.nexustoons.com/manga_pages/317/28583/page_1_d5bf6a1a.avif
+>>22.6-56.11-77-3 | {"color":"#f1f1f1ff","font-weight":"600","background":"#000000ff","padding":"10px","text-align":"center"} | 1
+O Soberando supremo da eternidade
+>>12.65-70.01-25.5-3 | {"color":"#f1f1f1ff","font-weight":"600","background":"#000000ff","text-align":"center"} | 2
+Tradutor
+>>42-69-23-4 | {"background":"#000","color":"#ffff"} | 0
+revisor
+$END intro
+$FONTS
+https://cdn.jsdelivr.net/npm/@fontsource/inter@5.0.18/files/inter-latin-400-normal.woff2
+https://cdn.jsdelivr.net/npm/@fontsource/roboto@5.0.8/files/roboto-latin-400-normal.woff2
+$ENDFONTS
+$CONSTS
+@ accent_spotify | #1DB954
+@ shadow_card | "boxShadow":"0 8px 24px rgba(0,0,0,0.35)"
+@ text_secondary | #A1A1AA
+$ENDCONSTS
