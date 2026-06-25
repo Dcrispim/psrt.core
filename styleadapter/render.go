@@ -194,6 +194,28 @@ func RectDecorationAttrs(f StyleFragment) string {
 	return rectAttrs(f, false)
 }
 
+// PathDecorationAttrs returns fill/stroke/filter attrs for a ~~ block's <path>
+// element — same as RectDecorationAttrs but without "rx" (border-radius has no
+// meaning for an arbitrary path; the contour is already defined by the path itself).
+func PathDecorationAttrs(f StyleFragment) string {
+	if f == nil || f.GetString(TypeKey) != TypePath {
+		return ""
+	}
+	var parts []string
+	for _, k := range []string{"fill", "stroke", "stroke-width", "filter", "mask"} {
+		v, ok := f[k]
+		if !ok || v == nil {
+			continue
+		}
+		s := fmt.Sprint(v)
+		if s == "" {
+			continue
+		}
+		parts = append(parts, fmt.Sprintf(`%s="%s"`, k, svgEscape(s)))
+	}
+	return strings.Join(parts, " ")
+}
+
 func rectAttrs(f StyleFragment, includeLayout bool) string {
 	var parts []string
 	keys := []string{"fill", "stroke", "stroke-width", "rx", "filter", "mask"}

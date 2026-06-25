@@ -10,8 +10,8 @@ import (
 func TestAdaptHTML_blurBackdrop(t *testing.T) {
 	ctx := AdaptContext{
 		Text: psrt.Text{
-			X: 10, Y: 20, Width: 50, TextSize: 5,
-			Style: psrt.Style(`{"background":"#0008","blur":"8px"}`),
+			BaseBlock: psrt.BaseBlock{X: 10, Y: 20, Width: 50, Style: psrt.Style(`{"background":"#0008","blur":"8px"}`)},
+			TextSize:  5,
 		},
 		CanvasW: 1000, CanvasH: 500, FontSizePx: 20,
 	}
@@ -33,7 +33,7 @@ func TestAdaptHTML_blurBackdrop(t *testing.T) {
 func TestAdaptHTML_blurLeftMask(t *testing.T) {
 	ctx := AdaptContext{
 		Text: psrt.Text{
-			Style: psrt.Style(`{"blurLeft":"12px","background":"#fff"}`),
+			BaseBlock: psrt.BaseBlock{Style: psrt.Style(`{"blurLeft":"12px","background":"#fff"}`)},
 		},
 		CanvasW: 800, CanvasH: 600, FontSizePx: 24,
 	}
@@ -57,7 +57,7 @@ func TestAdaptHTML_blurLeftMask(t *testing.T) {
 
 func TestAdaptSVG_blurFilterAndMask(t *testing.T) {
 	ctx := AdaptContext{
-		Text:       psrt.Text{X: 0, Y: 0, Width: 50, TextSize: 5, Style: psrt.Style(`{"blur":"6px left","background":"#eaede5"}`)},
+		Text:       psrt.Text{BaseBlock: psrt.BaseBlock{X: 0, Y: 0, Width: 50, Style: psrt.Style(`{"blur":"6px left","background":"#eaede5"}`)}, TextSize: 5},
 		CanvasW:    200, CanvasH: 100, FontSizePx: 5,
 		PageSlug:   "p", TextIndex: 2,
 	}

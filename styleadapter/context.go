@@ -12,6 +12,7 @@ type AdaptContext struct {
 	Style      map[string]json.RawMessage
 	Text       psrt.Text
 	Mask       *psrt.Mask
+	PathMask   *psrt.PathMask
 	CanvasW    int
 	CanvasH    int
 	FontSizePx float64

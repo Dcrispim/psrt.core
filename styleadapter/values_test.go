@@ -27,7 +27,7 @@ func TestNormalize_omitsFalseBoolean(t *testing.T) {
 func TestAdaptWebPreview_noHeightWhenAbsent(t *testing.T) {
 	ctx := AdaptContext{
 		Text: psrt.Text{
-			Style: psrt.Style(`{"background":"#000000ff","color":"#fff"}`),
+			BaseBlock: psrt.BaseBlock{Style: psrt.Style(`{"background":"#000000ff","color":"#fff"}`)},
 		},
 		CanvasW: 1920, CanvasH: 1080, FontSizePx: 54,
 	}

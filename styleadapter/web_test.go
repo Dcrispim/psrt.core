@@ -10,8 +10,8 @@ import (
 func TestAdaptWebPreview_backgroundAndFontSize(t *testing.T) {
 	ctx := AdaptContext{
 		Text: psrt.Text{
-			X: 10, Y: 20, Width: 50, TextSize: 5,
-			Style: psrt.Style(`{"background":"#000000ff","color":"#fff","font-weight":"600"}`),
+			BaseBlock: psrt.BaseBlock{X: 10, Y: 20, Width: 50, Style: psrt.Style(`{"background":"#000000ff","color":"#fff","font-weight":"600"}`)},
+			TextSize:  5,
 		},
 		CanvasW: 1920, CanvasH: 1080, FontSizePx: 54, Zoom: 2,
 	}
@@ -30,8 +30,8 @@ func TestAdaptWebPreview_backgroundAndFontSize(t *testing.T) {
 func TestAdaptWebPreview_zoomScalesFont(t *testing.T) {
 	ctx := AdaptContext{
 		Text: psrt.Text{
-			TextSize: 10,
-			Style:    psrt.Style(`{}`),
+			BaseBlock: psrt.BaseBlock{Style: psrt.Style(`{}`)},
+			TextSize:  10,
 		},
 		CanvasW: 1000, CanvasH: 1000, Zoom: 2,
 	}
@@ -49,7 +49,7 @@ func TestAdaptWebPreview_stringifyRoundtrip(t *testing.T) {
 	raw := `{"backGround":"#000","color":"#fff"}`
 	ctx := AdaptContext{
 		Text: psrt.Text{
-			Style: psrt.Style(raw),
+			BaseBlock: psrt.BaseBlock{Style: psrt.Style(raw)},
 		},
 		CanvasW: 800, CanvasH: 600, FontSizePx: 30,
 	}

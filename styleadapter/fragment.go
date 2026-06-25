@@ -6,6 +6,7 @@ const (
 	TypeMotionDiv     = "div"
 	TypeSpan          = "span"
 	TypeRect          = "rect"
+	TypePath          = "path"
 	TypeForeignObject = "foreignObject"
 	TypeDiv           = "div" // inner XHTML inside foreignObject
 	TypeFilter        = "filter"

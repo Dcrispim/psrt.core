@@ -59,7 +59,7 @@ func TestApplyPercentHandlers_textShadow(t *testing.T) {
 
 func TestAdaptHTML_layoutAndStroke(t *testing.T) {
 	ctx := AdaptContext{
-		Text: psrt.Text{X: 10, Y: 20, Width: 30, TextSize: 4, Style: psrt.Style(`{"strokeWidth":"2","color":"#fff"}`)},
+		Text: psrt.Text{BaseBlock: psrt.BaseBlock{X: 10, Y: 20, Width: 30, Style: psrt.Style(`{"strokeWidth":"2","color":"#fff"}`)}, TextSize: 4},
 		CanvasW: 1000, CanvasH: 500, FontSizePx: 20,
 	}
 	frags := AdaptHTML(ctx)
@@ -85,7 +85,7 @@ func TestAdaptHTML_layoutAndStroke(t *testing.T) {
 
 func TestAdaptSVG_splitBoxAndText(t *testing.T) {
 	ctx := AdaptContext{
-		Text:       psrt.Text{X: 0, Y: 0, Width: 50, TextSize: 5, Style: psrt.Style(`{"background":"#000","color":"#fff"}`)},
+		Text:       psrt.Text{BaseBlock: psrt.BaseBlock{X: 0, Y: 0, Width: 50, Style: psrt.Style(`{"background":"#000","color":"#fff"}`)}, TextSize: 5},
 		CanvasW:    200, CanvasH: 100, FontSizePx: 5,
 		PageSlug:   "p", TextIndex: 0,
 	}
@@ -112,7 +112,7 @@ func TestAdaptSVG_splitBoxAndText(t *testing.T) {
 
 func TestAdaptHTML_glow(t *testing.T) {
 	ctx := AdaptContext{
-		Text: psrt.Text{Style: psrt.Style(`{"glow":"1% 1% 2% rgba(0,0,0,0.5)"}`)},
+		Text: psrt.Text{BaseBlock: psrt.BaseBlock{Style: psrt.Style(`{"glow":"1% 1% 2% rgba(0,0,0,0.5)"}`)}},
 		CanvasW: 100, CanvasH: 100, FontSizePx: 10,
 	}
 	frags := AdaptHTML(ctx)
