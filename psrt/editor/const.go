@@ -6,7 +6,7 @@ import (
 	"fmt"
 	"strings"
 
-	"psrt/psrt"
+	"github.com/Dcrispim/psrt.core/psrt"
 )
 
 // AddConst registers a constant and replaces literal value occurrences with @name@.

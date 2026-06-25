@@ -5,7 +5,7 @@ package wasmbridge
 import (
 	"syscall/js"
 
-	"psrt/psrt"
+	"github.com/Dcrispim/psrt.core/psrt"
 )
 
 func loadDocJSON(args []js.Value) (psrt.Document, error) {

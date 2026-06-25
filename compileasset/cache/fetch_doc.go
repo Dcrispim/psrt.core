@@ -4,8 +4,8 @@ import (
 	"context"
 	"net/http"
 
-	"psrt/compileasset"
-	"psrt/psrt"
+	"github.com/Dcrispim/psrt.core/compileasset"
+	"github.com/Dcrispim/psrt.core/psrt"
 )
 
 // FetchDocumentURLsWithCache uses page labels from doc for any missing cache entries.

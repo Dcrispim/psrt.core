@@ -3,7 +3,7 @@ package editor
 import (
 	"fmt"
 
-	"psrt/psrt"
+	"github.com/Dcrispim/psrt.core/psrt"
 )
 
 // FindPage returns the page with the given name.

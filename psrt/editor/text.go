@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"strconv"
 
-	"psrt/psrt"
+	"github.com/Dcrispim/psrt.core/psrt"
 )
 
 // SetTextStyle merges style properties on a text block.

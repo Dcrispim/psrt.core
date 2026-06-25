@@ -6,7 +6,7 @@ import (
 	"runtime"
 	"strings"
 
-	"psrt/compileasset"
+	"github.com/Dcrispim/psrt.core/compileasset"
 )
 
 func ResolveWithinBase(baseDir, rawPath string) (string, error) {

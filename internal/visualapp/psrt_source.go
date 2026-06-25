@@ -3,8 +3,8 @@ package visualapp
 import (
 	"fmt"
 
-	"psrt/psrt"
-	"psrt/psrt/editor"
+	"github.com/Dcrispim/psrt.core/psrt"
+	"github.com/Dcrispim/psrt.core/psrt/editor"
 )
 
 // GetDocumentPSRT returns the current document serialised as PSRT text.

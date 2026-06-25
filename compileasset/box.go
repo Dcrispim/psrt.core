@@ -6,8 +6,8 @@ import (
 	"strconv"
 	"strings"
 
-	"psrt/psrt"
-	"psrt/styleadapter"
+	"github.com/Dcrispim/psrt.core/psrt"
+	"github.com/Dcrispim/psrt.core/styleadapter"
 )
 
 // TextBox describes background/border decoration for a text block.

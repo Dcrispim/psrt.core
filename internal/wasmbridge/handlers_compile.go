@@ -9,10 +9,10 @@ import (
 	"syscall/js"
 	"time"
 
-	"psrt/compilehtml"
-	"psrt/compileopts"
-	"psrt/compilesvg"
-	"psrt/psrt"
+	"github.com/Dcrispim/psrt.core/compilehtml"
+	"github.com/Dcrispim/psrt.core/compileopts"
+	"github.com/Dcrispim/psrt.core/compilesvg"
+	"github.com/Dcrispim/psrt.core/psrt"
 )
 
 func loadDocFlexible(args []js.Value) (psrt.Document, error) {

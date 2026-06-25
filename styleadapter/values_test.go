@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"testing"
 
-	"psrt/psrt"
+	"github.com/Dcrispim/psrt.core/psrt"
 )
 
 func TestNormalize_omitsZeroHeight(t *testing.T) {

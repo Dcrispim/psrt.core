@@ -4,8 +4,8 @@ import (
 	"encoding/json"
 	"math"
 
-	"psrt/psrt"
-	"psrt/psrt/editor"
+	"github.com/Dcrispim/psrt.core/psrt"
+	"github.com/Dcrispim/psrt.core/psrt/editor"
 )
 
 // PatchText applies UI patch to a text block.

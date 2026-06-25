@@ -6,8 +6,8 @@ import (
 	"strconv"
 	"strings"
 
-	"psrt/compileasset"
-	"psrt/psrt"
+	"github.com/Dcrispim/psrt.core/compileasset"
+	"github.com/Dcrispim/psrt.core/psrt"
 )
 
 var shadowRGBA = regexp.MustCompile(`rgba?\([^)]+\)`)

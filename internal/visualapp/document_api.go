@@ -4,12 +4,12 @@ import (
 	"context"
 	"fmt"
 
-	"psrt/compileasset/cache"
-	"psrt/compilehtml"
-	"psrt/compileopts"
-	"psrt/compilesvg"
-	"psrt/psrt"
-	"psrt/psrt/editor"
+	"github.com/Dcrispim/psrt.core/compileasset/cache"
+	"github.com/Dcrispim/psrt.core/compilehtml"
+	"github.com/Dcrispim/psrt.core/compileopts"
+	"github.com/Dcrispim/psrt.core/compilesvg"
+	"github.com/Dcrispim/psrt.core/psrt"
+	"github.com/Dcrispim/psrt.core/psrt/editor"
 )
 
 // GetDocumentJSON returns the in-memory document as JSON.

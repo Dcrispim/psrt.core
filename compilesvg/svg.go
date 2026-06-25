@@ -5,10 +5,10 @@ import (
 	"fmt"
 	"strings"
 
-	"psrt/compileasset"
-	"psrt/compileopts"
-	"psrt/compilesvg/textoutline"
-	"psrt/psrt"
+	"github.com/Dcrispim/psrt.core/compileasset"
+	"github.com/Dcrispim/psrt.core/compileopts"
+	"github.com/Dcrispim/psrt.core/compilesvg/textoutline"
+	"github.com/Dcrispim/psrt.core/psrt"
 )
 
 // RenderPageSVG produces a standalone SVG for one page.

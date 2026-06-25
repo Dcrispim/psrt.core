@@ -6,8 +6,8 @@ import (
 	"os"
 	"strings"
 
-	"psrt/psrt"
-	"psrt/psrt/editor"
+	"github.com/Dcrispim/psrt.core/psrt"
+	"github.com/Dcrispim/psrt.core/psrt/editor"
 
 	"github.com/spf13/cobra"
 )

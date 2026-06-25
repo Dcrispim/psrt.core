@@ -5,7 +5,7 @@ import (
 	"html"
 	"strings"
 
-	"psrt/compilesvg/textoutline"
+	"github.com/Dcrispim/psrt.core/compilesvg/textoutline"
 )
 
 func writeOutlinedGlyphs(

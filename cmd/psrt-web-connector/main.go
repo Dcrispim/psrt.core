@@ -14,7 +14,7 @@ import (
 	"path/filepath"
 	"runtime"
 
-	"psrt/internal/webconnector"
+	"github.com/Dcrispim/psrt.core/internal/webconnector"
 )
 
 func exitFatal(format string, args ...any) {

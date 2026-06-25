@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"strings"
 
-	"psrt/psrt"
+	"github.com/Dcrispim/psrt.core/psrt"
 )
 
 // AddFont appends a font URL if not already present.

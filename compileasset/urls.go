@@ -3,7 +3,7 @@ package compileasset
 import (
 	"strings"
 
-	"psrt/psrt"
+	"github.com/Dcrispim/psrt.core/psrt"
 )
 
 // LooksLikeHTTPURL reports whether raw is an http(s) URL.

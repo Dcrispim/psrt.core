@@ -4,10 +4,10 @@ import (
 	"fmt"
 	"strings"
 
-	"psrt/compileasset"
-	"psrt/psrt"
-	"psrt/compilesvg/textoutline"
-	"psrt/styleadapter"
+	"github.com/Dcrispim/psrt.core/compileasset"
+	"github.com/Dcrispim/psrt.core/psrt"
+	"github.com/Dcrispim/psrt.core/compilesvg/textoutline"
+	"github.com/Dcrispim/psrt.core/styleadapter"
 )
 
 func adaptTextFragments(t *psrt.Text, pageSlug string, canvasW, canvasH int, fontPx float64) []styleadapter.StyleFragment {

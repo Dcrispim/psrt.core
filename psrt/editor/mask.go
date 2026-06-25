@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 
-	"psrt/psrt"
+	"github.com/Dcrispim/psrt.core/psrt"
 )
 
 // MaskPositionFields holds optional mask coordinate updates.

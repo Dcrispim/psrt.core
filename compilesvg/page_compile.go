@@ -5,10 +5,10 @@ import (
 	"fmt"
 	"net/http"
 
-	"psrt/compileasset"
-	"psrt/compileasset/cache"
-	"psrt/compileopts"
-	"psrt/psrt"
+	"github.com/Dcrispim/psrt.core/compileasset"
+	"github.com/Dcrispim/psrt.core/compileasset/cache"
+	"github.com/Dcrispim/psrt.core/compileopts"
+	"github.com/Dcrispim/psrt.core/psrt"
 )
 
 // CompilePageSVG returns SVG bytes for a single page by name.

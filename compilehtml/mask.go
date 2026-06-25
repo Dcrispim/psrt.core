@@ -4,9 +4,9 @@ import (
 	"html"
 	"strings"
 
-	"psrt/compileasset"
-	"psrt/psrt"
-	"psrt/styleadapter"
+	"github.com/Dcrispim/psrt.core/compileasset"
+	"github.com/Dcrispim/psrt.core/psrt"
+	"github.com/Dcrispim/psrt.core/styleadapter"
 )
 
 func writeMaskLayer(w *strings.Builder, m *psrt.Mask, assets map[string]compileasset.Asset, canvasW, canvasH, variantIndex int, hidden bool, linksOnly bool) {

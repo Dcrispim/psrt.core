@@ -7,9 +7,9 @@ import (
 	"path/filepath"
 	"time"
 
-	"psrt/compilehtml"
-	"psrt/compileopts"
-	"psrt/compilesvg"
+	"github.com/Dcrispim/psrt.core/compilehtml"
+	"github.com/Dcrispim/psrt.core/compileopts"
+	"github.com/Dcrispim/psrt.core/compilesvg"
 )
 
 var compileDebounce = 500 * time.Millisecond

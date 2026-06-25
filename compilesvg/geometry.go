@@ -4,8 +4,8 @@ import (
 	"math"
 	"strings"
 
-	"psrt/compileasset"
-	"psrt/psrt"
+	"github.com/Dcrispim/psrt.core/compileasset"
+	"github.com/Dcrispim/psrt.core/psrt"
 )
 
 // TextBlockGeometry maps PSRT percent coords to a pixel rect for layout (SVG foreignObject / HTML text-layer).

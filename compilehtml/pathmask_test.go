@@ -4,8 +4,8 @@ import (
 	"strings"
 	"testing"
 
-	"psrt/compileasset"
-	"psrt/psrt"
+	"github.com/Dcrispim/psrt.core/compileasset"
+	"github.com/Dcrispim/psrt.core/psrt"
 )
 
 const balloonPathHTML = "M10,50 C10,25 30,10 50,10 C70,10 90,25 90,50 Z"

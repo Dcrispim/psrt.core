@@ -3,7 +3,7 @@ package compilesvg
 import (
 	"testing"
 
-	"psrt/psrt"
+	"github.com/Dcrispim/psrt.core/psrt"
 )
 
 func TestResolveDocument_expandsStyleAndContent(t *testing.T) {

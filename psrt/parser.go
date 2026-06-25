@@ -12,7 +12,7 @@ import (
 	"unicode"
 	"unicode/utf8"
 
-	"psrt/svgpath"
+	"github.com/Dcrispim/psrt.core/svgpath"
 )
 
 const pipeSep = " | "

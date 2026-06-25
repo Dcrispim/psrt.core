@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"strings"
 
-	"psrt/psrt"
+	"github.com/Dcrispim/psrt.core/psrt"
 )
 
 // RenamePage changes a page name.

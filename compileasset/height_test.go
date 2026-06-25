@@ -3,7 +3,7 @@ package compileasset
 import (
 	"testing"
 
-	"psrt/psrt"
+	"github.com/Dcrispim/psrt.core/psrt"
 )
 
 func TestExplicitHeightPx_percent(t *testing.T) {

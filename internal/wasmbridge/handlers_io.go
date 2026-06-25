@@ -5,8 +5,8 @@ package wasmbridge
 import (
 	"syscall/js"
 
-	"psrt/psrt"
-	"psrt/psrt/editor"
+	"github.com/Dcrispim/psrt.core/psrt"
+	"github.com/Dcrispim/psrt.core/psrt/editor"
 )
 
 func HandleParse() js.Func {

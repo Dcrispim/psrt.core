@@ -1,6 +1,6 @@
 package visualapp
 
-import "psrt/psrt"
+import "github.com/Dcrispim/psrt.core/psrt"
 
 type undoStack struct {
 	items []psrt.Document

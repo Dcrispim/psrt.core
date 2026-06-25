@@ -5,8 +5,8 @@ import (
 	"strings"
 	"testing"
 
-	"psrt/psrt"
-	"psrt/styleadapter/percent"
+	"github.com/Dcrispim/psrt.core/psrt"
+	"github.com/Dcrispim/psrt.core/styleadapter/percent"
 )
 
 func TestResolveName_aliases(t *testing.T) {

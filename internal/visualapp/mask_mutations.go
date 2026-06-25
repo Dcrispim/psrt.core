@@ -1,8 +1,8 @@
 package visualapp
 
 import (
-	"psrt/psrt"
-	"psrt/psrt/editor"
+	"github.com/Dcrispim/psrt.core/psrt"
+	"github.com/Dcrispim/psrt.core/psrt/editor"
 )
 
 // PatchMask applies UI patch to a mask block.

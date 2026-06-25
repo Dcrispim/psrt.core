@@ -3,7 +3,7 @@ package editor
 import (
 	"testing"
 
-	"psrt/psrt"
+	"github.com/Dcrispim/psrt.core/psrt"
 )
 
 func TestSetTextStyleAndContent(t *testing.T) {

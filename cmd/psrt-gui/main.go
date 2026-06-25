@@ -12,10 +12,10 @@ import (
 	"github.com/wailsapp/wails/v2/pkg/options/assetserver"
 	"github.com/wailsapp/wails/v2/pkg/runtime"
 
-	"psrt/compilesvg/textoutline"
-	"psrt/internal/crashlog"
-	"psrt/internal/visualapp"
-	"psrt/psrt"
+	"github.com/Dcrispim/psrt.core/compilesvg/textoutline"
+	"github.com/Dcrispim/psrt.core/internal/crashlog"
+	"github.com/Dcrispim/psrt.core/internal/visualapp"
+	"github.com/Dcrispim/psrt.core/psrt"
 )
 
 func init() {

@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"os"
 
-	"psrt/psrt"
+	"github.com/Dcrispim/psrt.core/psrt"
 )
 
 func readFile(path string) ([]byte, error) {
