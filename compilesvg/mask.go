@@ -4,9 +4,9 @@ import (
 	"fmt"
 	"strings"
 
-	"psrt/compileasset"
-	"psrt/psrt"
-	"psrt/styleadapter"
+	"github.com/Dcrispim/psrt.core/compileasset"
+	"github.com/Dcrispim/psrt.core/psrt"
+	"github.com/Dcrispim/psrt.core/styleadapter"
 )
 
 // MaskBlockGeometry maps mask percent coords to a pixel rect (fixed height, no text metrics).

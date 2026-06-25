@@ -4,7 +4,7 @@ import (
 	"math"
 	"testing"
 
-	"psrt/psrt"
+	"github.com/Dcrispim/psrt.core/psrt"
 )
 
 func TestTextBlockGeometry_introTitle(t *testing.T) {

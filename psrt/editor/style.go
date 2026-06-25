@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"strings"
 
-	"psrt/psrt"
+	"github.com/Dcrispim/psrt.core/psrt"
 )
 
 // SetStyleKey sets a single property on a style JSON object.

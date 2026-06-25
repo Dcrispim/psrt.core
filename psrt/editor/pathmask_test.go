@@ -3,7 +3,7 @@ package editor
 import (
 	"testing"
 
-	"psrt/psrt"
+	"github.com/Dcrispim/psrt.core/psrt"
 )
 
 const samplePathD = "M10,50 C10,25 30,10 50,10 C70,10 90,25 90,50 Z"

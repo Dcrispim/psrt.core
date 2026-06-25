@@ -5,8 +5,8 @@ import (
 	"fmt"
 	"strings"
 
-	"psrt/psrt"
-	"psrt/styleadapter/percent"
+	"github.com/Dcrispim/psrt.core/psrt"
+	"github.com/Dcrispim/psrt.core/styleadapter/percent"
 )
 
 // defaultAdapter implements Adapter.

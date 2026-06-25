@@ -1,6 +1,6 @@
 package compileasset
 
-import "psrt/psrt"
+import "github.com/Dcrispim/psrt.core/psrt"
 
 // TextLayerNeedsComputedHeight reports whether a text layer needs an explicit outer height
 // (explicit height in style or vertical padding/border) for flex vertical alignment to apply.

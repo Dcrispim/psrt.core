@@ -5,8 +5,8 @@ package wasmbridge
 import (
 	"syscall/js"
 
-	"psrt/compilesvg"
-	"psrt/psrt"
+	"github.com/Dcrispim/psrt.core/compilesvg"
+	"github.com/Dcrispim/psrt.core/psrt"
 )
 
 func HandleResolveDocument() js.Func {

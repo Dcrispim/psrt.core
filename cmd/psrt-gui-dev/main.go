@@ -11,8 +11,8 @@ import (
 	"os"
 	"strings"
 
-	"psrt/compileasset"
-	"psrt/internal/visualapp"
+	"github.com/Dcrispim/psrt.core/compileasset"
+	"github.com/Dcrispim/psrt.core/internal/visualapp"
 )
 
 func main() {

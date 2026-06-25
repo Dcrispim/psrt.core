@@ -5,7 +5,7 @@ import (
 	"strconv"
 	"strings"
 
-	"psrt/psrt"
+	"github.com/Dcrispim/psrt.core/psrt"
 )
 
 // ExplicitHeightPx returns the outer box height in pixels from style "height" when set.

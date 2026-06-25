@@ -8,7 +8,7 @@ import (
 	"strconv"
 	"strings"
 
-	"psrt/svgpath"
+	"github.com/Dcrispim/psrt.core/svgpath"
 )
 
 // FormatPSRT serialises a full document to PSRT syntax.

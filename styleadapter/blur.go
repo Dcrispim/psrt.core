@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"strings"
 
-	"psrt/styleadapter/percent"
+	"github.com/Dcrispim/psrt.core/styleadapter/percent"
 )
 
 const blurFilterKind = "blur"

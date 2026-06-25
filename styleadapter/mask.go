@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"strconv"
 
-	"psrt/styleadapter/percent"
+	"github.com/Dcrispim/psrt.core/styleadapter/percent"
 )
 
 // AdaptMaskHTML returns box CSS fragments for a static mask block.

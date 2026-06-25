@@ -6,8 +6,8 @@ import (
 	"encoding/json"
 	"syscall/js"
 
-	"psrt/psrt"
-	"psrt/psrt/editor"
+	"github.com/Dcrispim/psrt.core/psrt"
+	"github.com/Dcrispim/psrt.core/psrt/editor"
 )
 
 func HandleSetStyleKey() js.Func {

@@ -9,8 +9,8 @@ import (
 	"path/filepath"
 	"strings"
 
-	"psrt/compileasset"
-	"psrt/psrt"
+	"github.com/Dcrispim/psrt.core/compileasset"
+	"github.com/Dcrispim/psrt.core/psrt"
 )
 
 func readAll(resp *http.Response) ([]byte, error) {

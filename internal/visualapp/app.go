@@ -10,11 +10,11 @@ import (
 	"sync"
 	"time"
 
-	"psrt/compileasset"
-	"psrt/compileasset/cache"
-	"psrt/internal/crashlog"
-	"psrt/psrt"
-	"psrt/psrt/editor"
+	"github.com/Dcrispim/psrt.core/compileasset"
+	"github.com/Dcrispim/psrt.core/compileasset/cache"
+	"github.com/Dcrispim/psrt.core/internal/crashlog"
+	"github.com/Dcrispim/psrt.core/psrt"
+	"github.com/Dcrispim/psrt.core/psrt/editor"
 )
 
 // App holds editor state for the visual GUI.

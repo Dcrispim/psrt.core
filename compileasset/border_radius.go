@@ -5,7 +5,7 @@ import (
 	"strconv"
 	"strings"
 
-	"psrt/psrt"
+	"github.com/Dcrispim/psrt.core/psrt"
 )
 
 // BorderRadiusCorners holds four corner radii in pixels (after % resolution when applicable).

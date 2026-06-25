@@ -3,7 +3,7 @@ package styleadapter
 import (
 	"testing"
 
-	"psrt/psrt"
+	"github.com/Dcrispim/psrt.core/psrt"
 )
 
 func TestAdaptPathMaskSVG_decoration(t *testing.T) {

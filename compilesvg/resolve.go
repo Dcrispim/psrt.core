@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"strings"
 
-	"psrt/psrt"
+	"github.com/Dcrispim/psrt.core/psrt"
 )
 
 // ResolveDocument expands all @const@ placeholders in styles, content, and URLs.

@@ -4,9 +4,9 @@ import (
 	"path/filepath"
 	"strings"
 
-	"psrt/compilesvg"
-	"psrt/psrt"
-	"psrt/psrt/editor"
+	"github.com/Dcrispim/psrt.core/compilesvg"
+	"github.com/Dcrispim/psrt.core/psrt"
+	"github.com/Dcrispim/psrt.core/psrt/editor"
 )
 
 // Variant is one PSRT document bundled into a compiled HTML file.

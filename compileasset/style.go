@@ -7,7 +7,7 @@ import (
 	"strconv"
 	"strings"
 
-	"psrt/psrt"
+	"github.com/Dcrispim/psrt.core/psrt"
 )
 
 // CSSFromStyleJSON converts PSRT style JSON to CSS declarations (no selector).

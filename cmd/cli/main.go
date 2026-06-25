@@ -6,7 +6,7 @@ import (
 	"fmt"
 	"io"
 	"os"
-	"psrt/psrt"
+	"github.com/Dcrispim/psrt.core/psrt"
 	"strconv"
 	"strings"
 

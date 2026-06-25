@@ -4,9 +4,9 @@ import (
 	"fmt"
 	"strings"
 
-	"psrt/compileasset"
-	"psrt/psrt"
-	"psrt/styleadapter"
+	"github.com/Dcrispim/psrt.core/compileasset"
+	"github.com/Dcrispim/psrt.core/psrt"
+	"github.com/Dcrispim/psrt.core/styleadapter"
 )
 
 // PathMaskBlockGeometry maps ~~ percent coords to a pixel rect for the nested

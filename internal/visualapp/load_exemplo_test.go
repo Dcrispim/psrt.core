@@ -3,7 +3,7 @@ package visualapp
 import (
 	"testing"
 
-	"psrt/psrt/editor"
+	"github.com/Dcrispim/psrt.core/psrt/editor"
 )
 
 func TestLoadExemploOut(t *testing.T) {
