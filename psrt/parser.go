@@ -11,6 +11,8 @@ import (
 	"strings"
 	"unicode"
 	"unicode/utf8"
+
+	"psrt/svgpath"
 )
 
 const pipeSep = " | "
@@ -28,11 +30,49 @@ func newLineScanner(r io.Reader) *bufio.Scanner {
 
 type parseOptions struct {
 	skipSourceValues bool
+	// onBlockError, when set, switches the parser to tolerant mode: a failure
+	// on an individual content block (>>, ==, ~~, or an unrecognized marker)
+	// inside an already-open page is reported here and the offending block is
+	// discarded instead of aborting the whole parse. Structural errors
+	// ($START/$END mismatches, $FONTS/$CONSTS/$SOURCE, EOF with an open page)
+	// are unaffected and still abort the parse even in tolerant mode.
+	onBlockError func(lineNo int, err error)
 }
 
 // Parse reads a PSRT document line by line and returns its structured form.
 func Parse(r io.Reader) (Document, error) {
 	return parseDocument(r, parseOptions{})
+}
+
+// ParseError is one discarded-block failure accumulated by ParseTolerant.
+type ParseError struct {
+	Line    int
+	Message string
+}
+
+func (e ParseError) Error() string {
+	return fmt.Sprintf("line %d: %s", e.Line, e.Message)
+}
+
+// ParseTolerant parses a PSRT document like Parse, but never aborts on a
+// malformed or unrecognized >>/==/~~ block inside an already-open page: the
+// offending block is discarded and its error is accumulated instead. This is
+// the opt-in counterpart to Parse's all-or-nothing contract, for readers that
+// would rather show a partial document than fail entirely on a marker or
+// block they don't understand (e.g. an older reader encountering ~~).
+func ParseTolerant(r io.Reader) (Document, []ParseError) {
+	var errs []ParseError
+	doc, err := parseDocument(r, parseOptions{
+		onBlockError: func(lineNo int, blockErr error) {
+			errs = append(errs, ParseError{Line: lineNo, Message: blockErr.Error()})
+		},
+	})
+	if err != nil {
+		// Structural failure (outside the per-block tolerance above): surface
+		// it the same way, with whatever partial document was built so far.
+		errs = append(errs, ParseError{Line: 0, Message: err.Error()})
+	}
+	return doc, errs
 }
 
 func parseDocument(r io.Reader, opts parseOptions) (Document, error) {
@@ -44,6 +84,7 @@ func parseDocument(r io.Reader, opts parseOptions) (Document, error) {
 
 	var cur *Page
 	var active *textBuilder
+	var activePath *pathMaskBuilder
 	var skipMaskBody bool
 	var inFonts, inConsts, inSource bool
 	var sourceClosed bool
@@ -166,6 +207,11 @@ func parseDocument(r io.Reader, opts parseOptions) (Document, error) {
 				if err := flushTextBlock(cur, &active, lineNo); err != nil {
 					return doc, err
 				}
+				if err := flushPathMaskBlock(cur, &activePath, lineNo); err != nil {
+					if !handleBlockErr(opts, lineNo, err) {
+						return doc, err
+					}
+				}
 				cur = nil
 				continue
 			}
@@ -184,10 +230,19 @@ func parseDocument(r io.Reader, opts parseOptions) (Document, error) {
 			if err := flushTextBlock(cur, &active, lineNo); err != nil {
 				return doc, err
 			}
+			if err := flushPathMaskBlock(cur, &activePath, lineNo); err != nil {
+				if !handleBlockErr(opts, lineNo, err) {
+					return doc, err
+				}
+			}
 			skipMaskBody = false
 			t, err := parseTextHeader(strings.TrimSpace(trimmedForHeader), lineNo)
 			if err != nil {
-				return doc, err
+				if !handleBlockErr(opts, lineNo, err) {
+					return doc, err
+				}
+				skipMaskBody = true
+				continue
 			}
 			active = &textBuilder{text: t}
 			continue
@@ -197,16 +252,55 @@ func parseDocument(r io.Reader, opts parseOptions) (Document, error) {
 			if err := flushTextBlock(cur, &active, lineNo); err != nil {
 				return doc, err
 			}
+			if err := flushPathMaskBlock(cur, &activePath, lineNo); err != nil {
+				if !handleBlockErr(opts, lineNo, err) {
+					return doc, err
+				}
+			}
 			m, err := parseMaskHeader(strings.TrimSpace(trimmedForHeader), lineNo)
 			if err != nil {
-				return doc, err
+				if !handleBlockErr(opts, lineNo, err) {
+					return doc, err
+				}
+				skipMaskBody = true
+				continue
 			}
 			cur.Masks = append(cur.Masks, m)
 			skipMaskBody = true
 			continue
 		}
 
+		if strings.HasPrefix(trimmedForHeader, "~~") {
+			if err := flushTextBlock(cur, &active, lineNo); err != nil {
+				return doc, err
+			}
+			if err := flushPathMaskBlock(cur, &activePath, lineNo); err != nil {
+				if !handleBlockErr(opts, lineNo, err) {
+					return doc, err
+				}
+			}
+			skipMaskBody = false
+			pm, err := parsePathMaskHeader(strings.TrimSpace(trimmedForHeader), lineNo, cur)
+			if err != nil {
+				if !handleBlockErr(opts, lineNo, err) {
+					return doc, err
+				}
+				skipMaskBody = true
+				continue
+			}
+			activePath = &pathMaskBuilder{mask: pm, headerLine: lineNo}
+			continue
+		}
+
 		if skipMaskBody {
+			continue
+		}
+
+		if activePath != nil {
+			if activePath.buf.Len() > 0 {
+				activePath.buf.WriteByte('\n')
+			}
+			activePath.buf.WriteString(strings.TrimRight(line, "\r"))
 			continue
 		}
 
@@ -215,7 +309,11 @@ func parseDocument(r io.Reader, opts parseOptions) (Document, error) {
 			if s == "" {
 				continue
 			}
-			return doc, fmt.Errorf("line %d: text content without active >> block in page %q", lineNo, cur.Name)
+			err := fmt.Errorf("line %d: text content without active >> block in page %q", lineNo, cur.Name)
+			if !handleBlockErr(opts, lineNo, err) {
+				return doc, err
+			}
+			continue
 		}
 		if active.buf.Len() > 0 {
 			active.buf.WriteByte('\n')
@@ -239,6 +337,20 @@ func parseDocument(r io.Reader, opts parseOptions) (Document, error) {
 		return doc, errors.New("EOF inside $SOURCE")
 	}
 	return doc, nil
+}
+
+// handleBlockErr reports a per-block error via opts.onBlockError (tolerant
+// mode) or signals that the caller should abort with err (strict mode, the
+// default — preserves today's all-or-nothing behavior unchanged).
+func handleBlockErr(opts parseOptions, lineNo int, err error) (tolerated bool) {
+	if err == nil {
+		return true
+	}
+	if opts.onBlockError != nil {
+		opts.onBlockError(lineNo, err)
+		return true
+	}
+	return false
 }
 
 // ParseString parses a PSRT document from a string.
@@ -282,11 +394,12 @@ func parsePageStart(rest string, lineNo int) (Page, error) {
 		return Page{}, fmt.Errorf("line %d: page style is not valid JSON", lineNo)
 	}
 	return Page{
-		Name:     name,
-		Style:    Style(styleStr),
-		ImageURL: imageURL,
-		Texts:    []Text{},
-		Masks:    []Mask{},
+		Name:      name,
+		Style:     Style(styleStr),
+		ImageURL:  imageURL,
+		Texts:     []Text{},
+		Masks:     []Mask{},
+		PathMasks: []PathMask{},
 	}, nil
 }
 
@@ -322,6 +435,83 @@ func parseTextHeader(line string, lineNo int) (Text, error) {
 			Style: Style(styleStr), Index: idx, ImageRef: imageRef,
 		},
 		TextSize: ts,
+	}, nil
+}
+
+type pathMaskBuilder struct {
+	mask       PathMask
+	buf        strings.Builder
+	headerLine int
+}
+
+// flushPathMaskBlock closes the path mask builder accumulated so far (if any),
+// normalizing and validating its body before appending it to cur.PathMasks.
+// Errors are reported against the block's header line, since the body itself
+// may span several lines with no per-line tracking (same as text blocks).
+//
+// SVG path grammar validation itself is delegated to the svgpath package
+// (package segregation: psrt owns the .psrt grammar, svgpath owns the `d`
+// attribute grammar). The single-shape rule (RF-7) is PSRT-specific policy
+// layered on top of svgpath's generic subpath count, not part of bare SVG
+// path validity, so it stays here rather than in svgpath.
+func flushPathMaskBlock(cur *Page, active **pathMaskBuilder, lineNo int) error {
+	if *active == nil {
+		return nil
+	}
+	b := *active
+	*active = nil
+	path := NormalizePathData(b.buf.String())
+	if path == "" {
+		return fmt.Errorf("line %d: path mask body is empty", b.headerLine)
+	}
+	info, err := svgpath.Parse(path)
+	if err != nil {
+		return fmt.Errorf("line %d: invalid svg path data: %w", b.headerLine, err)
+	}
+	if info.Subpaths > 1 {
+		return fmt.Errorf("line %d: path mask must be a single shape (multiple M/m commands found)", b.headerLine)
+	}
+	b.mask.Path = path
+	cur.PathMasks = append(cur.PathMasks, b.mask)
+	return nil
+}
+
+func parsePathMaskHeader(line string, lineNo int, cur *Page) (PathMask, error) {
+	body := strings.TrimSpace(line[2:])
+	parts := strings.Split(body, pipeSep)
+	if len(parts) < 3 {
+		return PathMask{}, fmt.Errorf("line %d: mask header needs coords | style | index", lineNo)
+	}
+	coords := strings.TrimSpace(parts[0])
+	styleStr := strings.TrimSpace(parts[1])
+	idxStr := strings.TrimSpace(parts[2])
+	var imageRef string
+	if len(parts) >= 4 {
+		imageRef = strings.TrimSpace(parts[3])
+	}
+
+	x, y, w, h, err := parseMaskCoords(coords, lineNo)
+	if err != nil {
+		return PathMask{}, err
+	}
+	if !json.Valid([]byte(styleStr)) {
+		return PathMask{}, fmt.Errorf("line %d: mask style is not valid JSON", lineNo)
+	}
+	idx, err := strconv.Atoi(idxStr)
+	if err != nil {
+		return PathMask{}, fmt.Errorf("line %d: invalid mask index %q: %w", lineNo, idxStr, err)
+	}
+	if cur != nil {
+		if _, err := FindBlockByIndex(cur, idx); err == nil {
+			return PathMask{}, fmt.Errorf("line %d: duplicate index %d", lineNo, idx)
+		}
+	}
+	return PathMask{
+		BaseBlock: BaseBlock{
+			X: x, Y: y, Width: w,
+			Style: Style(styleStr), Index: idx, ImageRef: imageRef,
+		},
+		Height: h,
 	}, nil
 }
 

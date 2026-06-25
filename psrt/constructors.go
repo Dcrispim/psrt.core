@@ -16,3 +16,12 @@ func NewMask(x, y, width, height float64, index int, style Style, imageRef strin
 		Height:    height,
 	}
 }
+
+// NewPathMask builds a path mask block.
+func NewPathMask(x, y, width, height float64, index int, style Style, imageRef, path string) PathMask {
+	return PathMask{
+		BaseBlock: BaseBlock{X: x, Y: y, Width: width, Style: style, Index: index, ImageRef: imageRef},
+		Height:    height,
+		Path:      path,
+	}
+}

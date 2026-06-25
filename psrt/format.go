@@ -7,6 +7,8 @@ import (
 	"sort"
 	"strconv"
 	"strings"
+
+	"psrt/svgpath"
 )
 
 // FormatPSRT serialises a full document to PSRT syntax.
@@ -116,6 +118,12 @@ func writePage(b *strings.Builder, p *Page, compact bool, consts map[string]stri
 					return err
 				}
 			}
+		case BlockPathMask:
+			if e.PathMask != nil {
+				if err := writePathMask(b, e.PathMask, consts); err != nil {
+					return err
+				}
+			}
 		}
 	}
 	b.WriteString("$END ")
@@ -176,6 +184,31 @@ func writeMask(b *strings.Builder, m *Mask, consts map[string]string) error {
 		b.WriteString(m.ImageRef)
 	}
 	b.WriteByte('\n')
+	return nil
+}
+
+func writePathMask(b *strings.Builder, m *PathMask, consts map[string]string) error {
+	_ = consts
+	style := string(m.Style)
+	if strings.TrimSpace(style) == "" {
+		style = "{}"
+	}
+	coord := formatCoordQuad(m.X, m.Y, m.Width, m.Height)
+	b.WriteString("~~")
+	b.WriteString(coord)
+	b.WriteString(pipeSep)
+	b.WriteString(style)
+	b.WriteString(pipeSep)
+	b.WriteString(strconv.Itoa(m.Index))
+	if strings.TrimSpace(m.ImageRef) != "" {
+		b.WriteString(pipeSep)
+		b.WriteString(m.ImageRef)
+	}
+	b.WriteByte('\n')
+	for _, line := range svgpath.SplitCommands(m.Path) {
+		b.WriteString(line)
+		b.WriteByte('\n')
+	}
 	return nil
 }
 

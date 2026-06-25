@@ -39,6 +39,8 @@ type Page struct {
 
 	Masks    []Mask `json:"masks,omitempty"`
 
+	PathMasks []PathMask `json:"pathMasks,omitempty"`
+
 }
 
 
@@ -92,6 +94,28 @@ type Mask struct {
 	BaseBlock
 
 	Height float64 `json:"height"`
+
+}
+
+
+
+// PathMask is a coverage block whose shape is an arbitrary SVG path (single sub-path).
+
+// Header: ~~ <X>-<Y>-<Width>-<Height> | <style-text> | <index> [| optional image ref].
+
+// X, Y, Width, Height define the local box (percent of page image); Path is interpreted
+
+// as a 0-100 viewBox relative to that box, not to the page.
+
+type PathMask struct {
+
+	BaseBlock
+
+	Height float64 `json:"height"`
+
+	// Path is the SVG path `d` attribute content, already concatenated/normalized.
+
+	Path string `json:"path"`
 
 }
 
