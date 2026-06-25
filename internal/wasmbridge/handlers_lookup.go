@@ -90,3 +90,26 @@ func HandleFindMaskByIndex() js.Func {
 		return json.Marshal(m)
 	})
 }
+
+func HandleFindPathMaskByIndex() js.Func {
+	return wrap(func(args []js.Value) ([]byte, error) {
+		doc, err := loadDocJSON(args)
+		if err != nil {
+			return nil, err
+		}
+		pageName, err := stringArg(args, 1)
+		if err != nil {
+			return nil, err
+		}
+		maskIndex := intArg(args, 2, -1)
+		page, err := editor.FindPage(&doc, pageName)
+		if err != nil {
+			return nil, err
+		}
+		m, _, err := editor.FindPathMaskByIndex(page, maskIndex)
+		if err != nil {
+			return nil, err
+		}
+		return json.Marshal(m)
+	})
+}

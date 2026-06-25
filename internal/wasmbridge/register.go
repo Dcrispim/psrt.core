@@ -46,6 +46,13 @@ func Register(exports js.Value) {
 	exports.Set("setMaskStyle", HandleSetMaskStyle())
 	exports.Set("removeMaskStyleKey", HandleRemoveMaskStyleKey())
 
+	exports.Set("setPathMaskPosition", HandleSetPathMaskPosition())
+	exports.Set("addPathMask", HandleAddPathMask())
+	exports.Set("removePathMask", HandleRemovePathMask())
+	exports.Set("setPathMaskStyle", HandleSetPathMaskStyle())
+	exports.Set("removePathMaskStyleKey", HandleRemovePathMaskStyleKey())
+	exports.Set("setPathMaskPath", HandleSetPathMaskPath())
+
 	exports.Set("setStyleKey", HandleSetStyleKey())
 	exports.Set("removeStyleKey", HandleRemoveStyleKey())
 	exports.Set("mergeStyle", HandleMergeStyle())
@@ -54,6 +61,7 @@ func Register(exports js.Value) {
 	exports.Set("findPageIndex", HandleFindPageIndex())
 	exports.Set("findTextByIndex", HandleFindTextByIndex())
 	exports.Set("findMaskByIndex", HandleFindMaskByIndex())
+	exports.Set("findPathMaskByIndex", HandleFindPathMaskByIndex())
 
 	exports.Set("compileToHtml", HandleCompileToHtml())
 	exports.Set("compileToSvg", HandleCompileToSvg())

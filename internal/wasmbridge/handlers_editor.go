@@ -24,12 +24,23 @@ type maskPositionFieldsJS struct {
 	Height *float64 `json:"height"`
 }
 
+type pathMaskPositionFieldsJS struct {
+	X      *float64 `json:"x"`
+	Y      *float64 `json:"y"`
+	Width  *float64 `json:"width"`
+	Height *float64 `json:"height"`
+}
+
 func toPositionFields(p positionFieldsJS) editor.PositionFields {
 	return editor.PositionFields{X: p.X, Y: p.Y, Width: p.Width, TextSize: p.TextSize}
 }
 
 func toMaskPositionFields(p maskPositionFieldsJS) editor.MaskPositionFields {
 	return editor.MaskPositionFields{X: p.X, Y: p.Y, Width: p.Width, Height: p.Height}
+}
+
+func toPathMaskPositionFields(p pathMaskPositionFieldsJS) editor.PathMaskPositionFields {
+	return editor.PathMaskPositionFields{X: p.X, Y: p.Y, Width: p.Width, Height: p.Height}
 }
 
 func HandleAddConst() js.Func {
@@ -471,6 +482,99 @@ func HandleRemoveMaskStyleKey() js.Func {
 		}
 		return mutateDocJSON(args, func(d *psrt.Document) error {
 			return editor.RemoveMaskStyleKey(d, pageName, maskIndex, key)
+		})
+	})
+}
+
+func HandleSetPathMaskPosition() js.Func {
+	return wrap(func(args []js.Value) ([]byte, error) {
+		pageName, _ := stringArg(args, 1)
+		maskIndex := intArg(args, 2, -1)
+		var pos pathMaskPositionFieldsJS
+		if err := parseJSONArg(args, 3, &pos); err != nil {
+			return nil, err
+		}
+		return mutateDocJSON(args, func(d *psrt.Document) error {
+			return editor.SetPathMaskPosition(d, pageName, maskIndex, toPathMaskPositionFields(pos))
+		})
+	})
+}
+
+func HandleAddPathMask() js.Func {
+	return wrap(func(args []js.Value) ([]byte, error) {
+		pageName, err := stringArg(args, 1)
+		if err != nil {
+			return nil, err
+		}
+		var mask psrt.PathMask
+		if err := parseJSONArg(args, 2, &mask); err != nil {
+			return nil, err
+		}
+		beforeIndex := optionalIndexArg(args, 3)
+		afterIndex := optionalIndexArg(args, 4)
+		return mutateDocJSON(args, func(d *psrt.Document) error {
+			return editor.AddPathMask(d, pageName, mask, beforeIndex, afterIndex)
+		})
+	})
+}
+
+func HandleRemovePathMask() js.Func {
+	return wrap(func(args []js.Value) ([]byte, error) {
+		pageName, _ := stringArg(args, 1)
+		maskIndex := intArg(args, 2, -1)
+		return mutateDocJSON(args, func(d *psrt.Document) error {
+			return editor.RemovePathMask(d, pageName, maskIndex)
+		})
+	})
+}
+
+func HandleSetPathMaskStyle() js.Func {
+	return wrap(func(args []js.Value) ([]byte, error) {
+		pageName, _ := stringArg(args, 1)
+		maskIndex := intArg(args, 2, -1)
+		key, err := stringArg(args, 3)
+		if err != nil {
+			return nil, err
+		}
+		value, err := stringArg(args, 4)
+		if err != nil {
+			return nil, err
+		}
+		var partial json.RawMessage
+		if len(args) > 5 {
+			b, _ := bytesArg(args, 5)
+			partial = json.RawMessage(b)
+		}
+		return mutateDocJSON(args, func(d *psrt.Document) error {
+			return editor.SetPathMaskStyle(d, pageName, maskIndex, key, value, partial)
+		})
+	})
+}
+
+func HandleRemovePathMaskStyleKey() js.Func {
+	return wrap(func(args []js.Value) ([]byte, error) {
+		pageName, _ := stringArg(args, 1)
+		maskIndex := intArg(args, 2, -1)
+		key, err := stringArg(args, 3)
+		if err != nil {
+			return nil, err
+		}
+		return mutateDocJSON(args, func(d *psrt.Document) error {
+			return editor.RemovePathMaskStyleKey(d, pageName, maskIndex, key)
+		})
+	})
+}
+
+func HandleSetPathMaskPath() js.Func {
+	return wrap(func(args []js.Value) ([]byte, error) {
+		pageName, _ := stringArg(args, 1)
+		maskIndex := intArg(args, 2, -1)
+		path, err := stringArg(args, 3)
+		if err != nil {
+			return nil, err
+		}
+		return mutateDocJSON(args, func(d *psrt.Document) error {
+			return editor.SetPathMaskPath(d, pageName, maskIndex, path)
 		})
 	})
 }
