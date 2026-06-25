@@ -184,6 +184,10 @@ func writeSlide(w *strings.Builder, p *psrt.Page, variants []Variant, assets map
 				if entry.Mask != nil {
 					writeMaskLayer(w, entry.Mask, assets, canvasW, canvasH, vi, vi > 0, opts.LinksOnly)
 				}
+			case psrt.BlockPathMask:
+				if entry.PathMask != nil {
+					writePathMaskLayer(w, entry.PathMask, compilesvg.Slug(p.Name), assets, canvasW, canvasH, vi, vi > 0, opts.LinksOnly)
+				}
 			}
 		}
 	}
