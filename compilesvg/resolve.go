@@ -34,6 +34,13 @@ func ResolveDocument(doc psrt.Document) psrt.Document {
 			m.ImageRef = psrt.ExpandConsts(strings.TrimSpace(m.ImageRef), consts)
 			p.Masks[j] = m
 		}
+		p.PathMasks = make([]psrt.PathMask, len(doc.Pages[i].PathMasks))
+		for j := range doc.Pages[i].PathMasks {
+			pm := doc.Pages[i].PathMasks[j]
+			pm.Style, _ = psrt.ExpandConstsInStyle(pm.Style, consts)
+			pm.ImageRef = psrt.ExpandConsts(strings.TrimSpace(pm.ImageRef), consts)
+			p.PathMasks[j] = pm
+		}
 		out.Pages[i] = p
 	}
 	return out
@@ -75,6 +82,16 @@ func ResolveDocumentStrict(doc psrt.Document) (psrt.Document, error) {
 			}
 			m.ImageRef = psrt.ExpandConsts(strings.TrimSpace(m.ImageRef), consts)
 			p.Masks[j] = m
+		}
+		p.PathMasks = make([]psrt.PathMask, len(doc.Pages[i].PathMasks))
+		for j := range doc.Pages[i].PathMasks {
+			pm := doc.Pages[i].PathMasks[j]
+			pm.Style, err = psrt.ExpandConstsInStyle(pm.Style, consts)
+			if err != nil {
+				return doc, fmt.Errorf("page %q path mask %d style: %w", p.Name, pm.Index, err)
+			}
+			pm.ImageRef = psrt.ExpandConsts(strings.TrimSpace(pm.ImageRef), consts)
+			p.PathMasks[j] = pm
 		}
 		out.Pages[i] = p
 	}

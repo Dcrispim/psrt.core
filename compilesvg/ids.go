@@ -96,6 +96,21 @@ func TextClassAttr(pageSlug string, index int) string {
 	return PageClass(pageSlug) + " " + TextClass(pageSlug, index)
 }
 
+// PathMaskID returns the standardized ~~ block id.
+func PathMaskID(slug string, index int) string {
+	return fmt.Sprintf("psrt-pathmask-%s-%d", slug, index)
+}
+
+// PathMaskWrapID returns the wrapper group id for a ~~ block.
+func PathMaskWrapID(slug string, index int) string {
+	return PathMaskID(slug, index) + "-wrap"
+}
+
+// PathMaskClipID returns the clipPath id used to clip a ~~ block's image-ref.
+func PathMaskClipID(slug string, index int) string {
+	return PathMaskID(slug, index) + "-clip"
+}
+
 // UniqueSlugs assigns a unique slug per page name (suffix -2, -3 on collision).
 func UniqueSlugs(pages []string) []string {
 	seen := make(map[string]int)

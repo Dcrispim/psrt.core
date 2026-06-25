@@ -96,6 +96,13 @@ func RenderPageSVGWithContext(
 			if err := writeMaskBlock(&b, entry.Mask, pageSlug, w, h, assets, opts.LinksOnly); err != nil {
 				return PageSVGResult{}, err
 			}
+		case psrt.BlockPathMask:
+			if entry.PathMask == nil {
+				continue
+			}
+			if err := writePathMaskBlock(&b, entry.PathMask, pageSlug, w, h, assets, opts.LinksOnly); err != nil {
+				return PageSVGResult{}, err
+			}
 		}
 	}
 
