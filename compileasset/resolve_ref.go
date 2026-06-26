@@ -3,7 +3,7 @@ package compileasset
 import (
 	"strings"
 
-	"psrt/psrt"
+	"github.com/Dcrispim/psrt.core/psrt"
 )
 
 // ResolveAssetReference expands @name@ placeholders in raw using consts, then trims.

@@ -6,7 +6,7 @@ import (
 	"encoding/json"
 	"syscall/js"
 
-	"psrt/psrt/editor"
+	"github.com/Dcrispim/psrt.core/psrt/editor"
 )
 
 func HandleFindPage() js.Func {

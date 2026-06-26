@@ -4,8 +4,8 @@ import (
 	"encoding/json"
 	"fmt"
 
-	"psrt/psrt"
-	"psrt/svgpath"
+	"github.com/Dcrispim/psrt.core/psrt"
+	"github.com/Dcrispim/psrt.core/svgpath"
 )
 
 // PathMaskPositionFields holds optional path mask coordinate updates.

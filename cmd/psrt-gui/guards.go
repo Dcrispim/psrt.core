@@ -1,6 +1,6 @@
 package main
 
-import "psrt/internal/crashlog"
+import "github.com/Dcrispim/psrt.core/internal/crashlog"
 
 func (g *GUIApp) currentFilePath() string {
 	if g.app == nil {

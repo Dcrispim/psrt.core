@@ -13,9 +13,9 @@ import (
 	"strings"
 	"testing"
 
-	"psrt/compileasset"
-	"psrt/compilesvg/textoutline"
-	"psrt/psrt"
+	"github.com/Dcrispim/psrt.core/compileasset"
+	"github.com/Dcrispim/psrt.core/compilesvg/textoutline"
+	"github.com/Dcrispim/psrt.core/psrt"
 )
 
 // minimal 1x1 PNG

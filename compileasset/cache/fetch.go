@@ -4,7 +4,7 @@ import (
 	"context"
 	"net/http"
 
-	"psrt/compileasset"
+	"github.com/Dcrispim/psrt.core/compileasset"
 )
 
 // FetchURLsWithCache loads assets from disk when mapped; otherwise downloads and caches.

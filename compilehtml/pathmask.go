@@ -5,9 +5,9 @@ import (
 	"html"
 	"strings"
 
-	"psrt/compileasset"
-	"psrt/psrt"
-	"psrt/styleadapter"
+	"github.com/Dcrispim/psrt.core/compileasset"
+	"github.com/Dcrispim/psrt.core/psrt"
+	"github.com/Dcrispim/psrt.core/styleadapter"
 )
 
 // writePathMaskLayer renders a ~~ block as a positioned <div> containing an

@@ -7,7 +7,7 @@ import (
 	"strings"
 	"testing"
 
-	"psrt/psrt"
+	"github.com/Dcrispim/psrt.core/psrt"
 )
 
 func TestIsLocalAssetRef(t *testing.T) {

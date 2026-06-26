@@ -3,7 +3,7 @@ package editor
 import (
 	"fmt"
 
-	"psrt/psrt"
+	"github.com/Dcrispim/psrt.core/psrt"
 )
 
 // PositionFields holds optional coordinate updates (nil = leave unchanged).

@@ -3,8 +3,8 @@ package visualapp
 import (
 	"encoding/json"
 
-	"psrt/psrt"
-	"psrt/styleadapter"
+	"github.com/Dcrispim/psrt.core/psrt"
+	"github.com/Dcrispim/psrt.core/styleadapter"
 )
 
 // WebPreviewStyle is adapted CSS for one text block in the web preview.

@@ -11,9 +11,9 @@ import (
 	"time"
 
 	"github.com/spf13/cobra"
-	"psrt/compilesvg"
-	"psrt/compileopts"
-	"psrt/psrt"
+	"github.com/Dcrispim/psrt.core/compilesvg"
+	"github.com/Dcrispim/psrt.core/compileopts"
+	"github.com/Dcrispim/psrt.core/psrt"
 )
 
 const version = "0.1.0"

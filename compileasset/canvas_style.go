@@ -4,9 +4,9 @@ import (
 	"encoding/json"
 	"strings"
 
-	"psrt/psrt"
-	"psrt/styleadapter"
-	"psrt/styleadapter/percent"
+	"github.com/Dcrispim/psrt.core/psrt"
+	"github.com/Dcrispim/psrt.core/styleadapter"
+	"github.com/Dcrispim/psrt.core/styleadapter/percent"
 )
 
 // StyleResolvedForCanvas applies percent handlers (padding, border-width, etc.) for render-time CSS/layout.

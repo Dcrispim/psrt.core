@@ -4,9 +4,9 @@ import (
 	"strings"
 	"testing"
 
-	"psrt/compileasset"
-	"psrt/compileopts"
-	"psrt/psrt"
+	"github.com/Dcrispim/psrt.core/compileasset"
+	"github.com/Dcrispim/psrt.core/compileopts"
+	"github.com/Dcrispim/psrt.core/psrt"
 )
 
 func TestRenderHTMLBundle_variantSwitcher(t *testing.T) {

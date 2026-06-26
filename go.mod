@@ -1,4 +1,4 @@
-module psrt
+module github.com/Dcrispim/psrt.core
 
 go 1.26.3
 

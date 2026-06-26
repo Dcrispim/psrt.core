@@ -4,9 +4,9 @@ import (
 	"strconv"
 	"strings"
 
-	"psrt/compilesvg"
-	"psrt/psrt"
-	"psrt/styleadapter"
+	"github.com/Dcrispim/psrt.core/compilesvg"
+	"github.com/Dcrispim/psrt.core/psrt"
+	"github.com/Dcrispim/psrt.core/styleadapter"
 )
 
 func enrichWebPreviewHeight(

@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"strconv"
 
-	"psrt/styleadapter/percent"
+	"github.com/Dcrispim/psrt.core/styleadapter/percent"
 )
 
 // AdaptPathMaskHTML returns style fragments for a ~~ block (compilehtml pipeline).

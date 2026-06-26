@@ -4,8 +4,8 @@ import (
 	"strings"
 	"testing"
 
-	"psrt/compileasset"
-	"psrt/psrt"
+	"github.com/Dcrispim/psrt.core/compileasset"
+	"github.com/Dcrispim/psrt.core/psrt"
 )
 
 func TestRenderPageSVG_maskBlock(t *testing.T) {

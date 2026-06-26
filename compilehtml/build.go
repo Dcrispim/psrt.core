@@ -6,11 +6,11 @@ import (
 	"path/filepath"
 	"strings"
 
-	"psrt/compileasset"
-	"psrt/compileasset/cache"
-	"psrt/compileopts"
-	"psrt/compilesvg"
-	"psrt/psrt"
+	"github.com/Dcrispim/psrt.core/compileasset"
+	"github.com/Dcrispim/psrt.core/compileasset/cache"
+	"github.com/Dcrispim/psrt.core/compileopts"
+	"github.com/Dcrispim/psrt.core/compilesvg"
+	"github.com/Dcrispim/psrt.core/psrt"
 )
 
 // Compile downloads all assets referenced by doc and returns a self-contained HTML document.

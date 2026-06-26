@@ -3,8 +3,8 @@ package styleadapter
 import (
 	"encoding/json"
 
-	"psrt/psrt"
-	"psrt/styleadapter/percent"
+	"github.com/Dcrispim/psrt.core/psrt"
+	"github.com/Dcrispim/psrt.core/styleadapter/percent"
 )
 
 // AdaptContext carries normalized style and layout for one text or mask block.

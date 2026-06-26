@@ -4,8 +4,8 @@ import (
 	"errors"
 	"net/http"
 
-	"psrt/compileasset"
-	"psrt/internal/visualapp"
+	"github.com/Dcrispim/psrt.core/compileasset"
+	"github.com/Dcrispim/psrt.core/internal/visualapp"
 )
 
 type AdaptEntriesReq struct {

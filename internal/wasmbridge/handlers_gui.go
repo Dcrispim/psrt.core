@@ -6,7 +6,7 @@ import (
 	"encoding/json"
 	"syscall/js"
 
-	"psrt/internal/visualapp"
+	"github.com/Dcrispim/psrt.core/internal/visualapp"
 )
 
 func HandleAdaptEntriesForWeb() js.Func {

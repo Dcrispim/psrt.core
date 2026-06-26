@@ -5,7 +5,7 @@ import (
 	"path/filepath"
 	"testing"
 
-	"psrt/psrt"
+	"github.com/Dcrispim/psrt.core/psrt"
 )
 
 func TestExtractPageDocument(t *testing.T) {

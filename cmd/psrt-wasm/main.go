@@ -5,7 +5,7 @@ package main
 import (
 	"syscall/js"
 
-	"psrt/internal/wasmbridge"
+	"github.com/Dcrispim/psrt.core/internal/wasmbridge"
 )
 
 func main() {

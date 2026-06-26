@@ -6,11 +6,11 @@ import (
 	"strconv"
 	"strings"
 
-	"psrt/compileasset"
-	"psrt/compileopts"
-	"psrt/compilesvg"
-	"psrt/psrt"
-	"psrt/styleadapter"
+	"github.com/Dcrispim/psrt.core/compileasset"
+	"github.com/Dcrispim/psrt.core/compileopts"
+	"github.com/Dcrispim/psrt.core/compilesvg"
+	"github.com/Dcrispim/psrt.core/psrt"
+	"github.com/Dcrispim/psrt.core/styleadapter"
 )
 
 // RenderHTML produces a standalone HTML document using embedded assets.

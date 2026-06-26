@@ -5,7 +5,7 @@ import (
 	"strings"
 	"unicode"
 
-	"psrt/psrt"
+	"github.com/Dcrispim/psrt.core/psrt"
 )
 
 var aliasToCanonical = map[string]string{

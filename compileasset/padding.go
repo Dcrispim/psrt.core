@@ -5,7 +5,7 @@ import (
 	"strconv"
 	"strings"
 
-	"psrt/psrt"
+	"github.com/Dcrispim/psrt.core/psrt"
 )
 
 // PaddingInsets holds resolved padding in pixels (top, right, bottom, left).

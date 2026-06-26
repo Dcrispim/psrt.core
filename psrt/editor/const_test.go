@@ -4,7 +4,7 @@ import (
 	"strings"
 	"testing"
 
-	"psrt/psrt"
+	"github.com/Dcrispim/psrt.core/psrt"
 )
 
 func docWithLiteralColor(t *testing.T) psrt.Document {

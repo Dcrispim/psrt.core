@@ -5,8 +5,8 @@ import (
 	"path/filepath"
 	"strings"
 
-	"psrt/psrt"
-	"psrt/psrt/editor"
+	"github.com/Dcrispim/psrt.core/psrt"
+	"github.com/Dcrispim/psrt.core/psrt/editor"
 )
 
 // extractPageDocument returns a copy of doc containing only the named page (fonts/consts preserved).

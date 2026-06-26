@@ -5,7 +5,7 @@ package wasmbridge
 import (
 	"encoding/json"
 
-	"psrt/psrt"
+	"github.com/Dcrispim/psrt.core/psrt"
 )
 
 func exportDocJSON(doc psrt.Document) ([]byte, error) {

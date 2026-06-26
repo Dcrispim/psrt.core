@@ -5,9 +5,9 @@ import (
 	"os"
 	"path/filepath"
 
-	"psrt/compilehtml"
-	"psrt/compileopts"
-	"psrt/compilesvg"
+	"github.com/Dcrispim/psrt.core/compilehtml"
+	"github.com/Dcrispim/psrt.core/compileopts"
+	"github.com/Dcrispim/psrt.core/compilesvg"
 )
 
 // ExportSVGFromDocument writes one SVG per page into parentDir/baseName/.

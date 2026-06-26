@@ -5,8 +5,8 @@ import (
 	"strings"
 	"testing"
 
-	"psrt/compileasset"
-	"psrt/psrt"
+	"github.com/Dcrispim/psrt.core/compileasset"
+	"github.com/Dcrispim/psrt.core/psrt"
 )
 
 func TestRenderHTML_tallWebtoon_percentPaddingAndSlideWidth(t *testing.T) {
