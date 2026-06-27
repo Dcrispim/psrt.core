@@ -3,6 +3,7 @@
 package wasmbridge
 
 import (
+	"encoding/json"
 	"syscall/js"
 
 	"github.com/Dcrispim/psrt.core/psrt"
@@ -77,5 +78,20 @@ func HandleFormatDocument() js.Func {
 		}
 		d := &doc
 		return editor.FormatDocument(d)
+	})
+}
+
+// HandleConfigure applies process-wide PSRT formatting options. Meant to be
+// called once, right after boot — see initPsrt() in the JS SDK.
+func HandleConfigure() js.Func {
+	return wrap(func(args []js.Value) ([]byte, error) {
+		var opts psrt.FormatOptions
+		if b, err := bytesArg(args, 0); err == nil && len(b) > 0 {
+			if err := json.Unmarshal(b, &opts); err != nil {
+				return nil, err
+			}
+		}
+		psrt.Configure(opts)
+		return nil, nil
 	})
 }
