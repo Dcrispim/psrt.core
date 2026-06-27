@@ -221,7 +221,7 @@ func formatCoordQuad(x, y, w, ts float64) string {
 		formatCoord(y),
 		formatCoord(w),
 		formatCoord(ts),
-	}, "-")
+	}, coordSep)
 }
 
 func sortedStringKeys(m map[string]string) []string {

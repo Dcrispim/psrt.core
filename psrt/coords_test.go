@@ -53,7 +53,7 @@ func TestFormatCoord(t *testing.T) {
 
 func TestParseCoordsMaxDecimals(t *testing.T) {
 	const src = `$START p | {} | https://x
->>11.649999999999999-70.01-25.5-3 | {} | 0
+>>11.649999999999999,70.01,25.5,3 | {} | 0
 hi
 $END p`
 	doc, err := ParseString(src)
@@ -69,7 +69,7 @@ $END p`
 		t.Fatal(err)
 	}
 	if string(out) != `$START p | {} | https://x
->>11.65-70.01-25.5-3 | {} | 0
+>>11.65,70.01,25.5,3 | {} | 0
 hi
 $END p
 ` {

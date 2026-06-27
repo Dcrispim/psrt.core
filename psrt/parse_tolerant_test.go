@@ -7,9 +7,9 @@ import (
 
 func TestParseTolerant_discardsInvalidBlockKeepsRest(t *testing.T) {
 	src := `$START p | {} | u
-~~10-10-20-5 | {} | 0
+~~10,10,20,5 | {} | 0
 M0,0 L10,10 Z
-~~30-30-20-5 | {} | 1
+~~30,30,20,5 | {} | 1
 $END p`
 	// The second ~~ has an empty body (malformed). The strict parser must
 	// fail the whole document; the tolerant one must keep the first block
@@ -36,7 +36,7 @@ $END p`
 func TestParseTolerant_unknownMarkerDiscarded(t *testing.T) {
 	src := `$START p | {} | u
 ##not-a-real-marker | {} | 1
->>10-10-20-3 | {} | 0
+>>10,10,20,3 | {} | 0
 hello
 $END p`
 	if _, err := ParseString(src); err == nil {
@@ -54,7 +54,7 @@ $END p`
 
 func TestParseTolerant_strictModeUnaffected(t *testing.T) {
 	src := `$START p | {} | u
-~~10-10-20-5 | {} | 0
+~~10,10,20,5 | {} | 0
 M0,0 L10,10 Z
 $END p`
 	doc, err := ParseString(src)
@@ -68,7 +68,7 @@ $END p`
 
 func TestParseTolerant_structuralErrorStillSurfaces(t *testing.T) {
 	src := `$START p | {} | u
->>10-10-20-3 | {} | 0
+>>10,10,20,3 | {} | 0
 hello`
 	// No matching $END before EOF — a structural error, not a per-block one;
 	// must still be reported even in tolerant mode.

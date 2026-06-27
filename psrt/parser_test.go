@@ -8,10 +8,10 @@ import (
 
 func TestParseFullDocument(t *testing.T) {
 	const src = `$START p1 | {"backGround":"#fff"} | https://img.example/a.png
-    >>10-10-3-40 | {"color":"black"} | 0
+    >>10,10,3,40 | {"color":"black"} | 0
     hello
 
-    >>20-20-5-50 | {} | 1
+    >>20,20,5,50 | {} | 1
 second block
 $END p1
 
@@ -68,7 +68,7 @@ $ENDCONSTS
 
 func TestJSONStyleIsEmbeddedObjectNotBase64(t *testing.T) {
 	const src = `$START p | {"backGround":"#fff"} | https://x
-    >>1-2-3-4 | {"color":"red"} | 0
+    >>1,2,3,4 | {"color":"red"} | 0
     hi
 $END p`
 	doc, err := ParseString(src)

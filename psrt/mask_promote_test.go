@@ -7,8 +7,8 @@ import (
 
 func TestParseMaskBlock(t *testing.T) {
 	const src = `$START p | {} | https://x
-==6.58-6.17-22.37-1.89 | {"bg":"#eee9b2"} | 0
->>11.94-8.36-13.33-3 | {"bg":"#eeeade"} | 1
+==6.58,6.17,22.37,1.89 | {"bg":"#eee9b2"} | 0
+>>11.94,8.36,13.33,3 | {"bg":"#eeeade"} | 1
 hello
 $END p`
 	doc, err := ParseString(src)
@@ -30,7 +30,7 @@ $END p`
 
 func TestMaskRoundTrip(t *testing.T) {
 	const src = `$START p | {} | u
-==10-10-20-5 | {"bg":"#fff"} | 0
+==10,10,20,5 | {"bg":"#fff"} | 0
 $END p`
 	doc, err := ParseString(src)
 	if err != nil {
@@ -40,7 +40,7 @@ $END p`
 	if err != nil {
 		t.Fatal(err)
 	}
-	if !strings.Contains(string(out), "==10-10-20-5") {
+	if !strings.Contains(string(out), "==10,10,20,5") {
 		t.Fatalf("format missing mask header:\n%s", out)
 	}
 	doc2, err := ParseString(string(out))
@@ -107,7 +107,7 @@ func TestPromoteEmptyTextUsesTextSizeWhenNoStyleHeight(t *testing.T) {
 
 func TestParseMaskCoordsError(t *testing.T) {
 	const src = `$START p | {} | u
-==1-2-3 | {} | 0
+==1,2,3 | {} | 0
 $END p`
 	if _, err := ParseString(src); err == nil {
 		t.Fatal("expected coord error")

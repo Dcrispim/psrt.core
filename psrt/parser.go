@@ -16,6 +16,7 @@ import (
 )
 
 const pipeSep = " | "
+const coordSep = ","
 
 // maxPSRTLineBytes is the per-line limit for bufio.Scanner ($SOURCE base64 can exceed 64 KiB).
 const maxPSRTLineBytes = 64 << 20 // 64 MiB
@@ -550,9 +551,9 @@ func parseMaskHeader(line string, lineNo int) (Mask, error) {
 }
 
 func parseCoords(s string, lineNo int) (x, y, w, ts float64, err error) {
-	chunks := strings.Split(s, "-")
+	chunks := strings.Split(s, coordSep)
 	if len(chunks) != 4 {
-		return 0, 0, 0, 0, fmt.Errorf("line %d: coords want X-Y-Width-TextSize, got %q", lineNo, s)
+		return 0, 0, 0, 0, fmt.Errorf("line %d: coords want X,Y,Width,TextSize, got %q", lineNo, s)
 	}
 	vals := make([]float64, 4)
 	for i, c := range chunks {
@@ -566,9 +567,9 @@ func parseCoords(s string, lineNo int) (x, y, w, ts float64, err error) {
 }
 
 func parseMaskCoords(s string, lineNo int) (x, y, w, h float64, err error) {
-	chunks := strings.Split(s, "-")
+	chunks := strings.Split(s, coordSep)
 	if len(chunks) != 4 {
-		return 0, 0, 0, 0, fmt.Errorf("line %d: coords want X-Y-Width-Height, got %q", lineNo, s)
+		return 0, 0, 0, 0, fmt.Errorf("line %d: coords want X,Y,Width,Height, got %q", lineNo, s)
 	}
 	vals := make([]float64, 4)
 	for i, c := range chunks {

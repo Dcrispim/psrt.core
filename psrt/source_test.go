@@ -7,7 +7,7 @@ import (
 
 func TestParseWithSource(t *testing.T) {
 	const src = `$START p1 | {} | https://cdn.example/capa.avif
->>10-10-80-3 | {"color":"#fff"} | 0
+>>10,10,80,3 | {"color":"#fff"} | 0
 hello
 $END p1
 
@@ -47,7 +47,7 @@ $ENDSOURCE
 
 func TestParseFastAndLoadSource(t *testing.T) {
 	const src = `$START p | {} | https://x/img.png
->>1-2-3-4 | {} | 0
+>>1,2,3,4 | {} | 0
 hi
 $END p
 
@@ -110,7 +110,7 @@ func TestParseWithLongSourceLine(t *testing.T) {
 	// Exceeds bufio default MaxScanTokenSize (64 KiB).
 	payload := strings.Repeat("A", 100*1024)
 	src := `$START p | {} | https://x/img.png
->>1-2-3-4 | {} | 0
+>>1,2,3,4 | {} | 0
 hi
 $END p
 

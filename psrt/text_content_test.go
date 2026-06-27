@@ -20,7 +20,7 @@ func TestNormalizeTextContent(t *testing.T) {
 
 func TestParse_trimsTextContent(t *testing.T) {
 	const src = `$START p | {} | https://example.com/i.png
->>0-0-10-10 | {} | 0
+>>0,0,10,10 | {} | 0
    trimmed text   
 $END p`
 	doc, err := ParseString(src)

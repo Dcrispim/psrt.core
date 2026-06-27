@@ -17,9 +17,9 @@ Z`
 
 func TestParsePathMaskBlock(t *testing.T) {
 	src := `$START p | {} | https://x
-~~6.58-6.17-22.37-8.4 | {"bg":"#eee9b2"} | 0
+~~6.58,6.17,22.37,8.4 | {"bg":"#eee9b2"} | 0
 ` + balloonPath + `
->>11.94-8.36-13.33-3 | {"bg":"#eeeade"} | 1
+>>11.94,8.36,13.33,3 | {"bg":"#eeeade"} | 1
 hello
 $END p`
 	doc, err := ParseString(src)
@@ -47,7 +47,7 @@ $END p`
 
 func TestPathMaskRoundTrip(t *testing.T) {
 	src := `$START p | {} | u
-~~10-10-20-5 | {"bg":"#fff"} | 0
+~~10,10,20,5 | {"bg":"#fff"} | 0
 ` + balloonPath + `
 $END p`
 	doc, err := ParseString(src)
@@ -58,7 +58,7 @@ $END p`
 	if err != nil {
 		t.Fatal(err)
 	}
-	if !strings.Contains(string(out), "~~10-10-20-5") {
+	if !strings.Contains(string(out), "~~10,10,20,5") {
 		t.Fatalf("format missing path mask header:\n%s", out)
 	}
 	doc2, err := ParseString(string(out))
@@ -76,7 +76,7 @@ $END p`
 
 func TestPathMaskJSONRoundTrip(t *testing.T) {
 	src := `$START p | {} | u
-~~10-10-20-5 | {"bg":"#fff"} | 0
+~~10,10,20,5 | {"bg":"#fff"} | 0
 ` + balloonPath + `
 $END p`
 	doc, err := ParseString(src)
@@ -105,7 +105,7 @@ $END p`
 
 func TestParsePathMaskCoordsError(t *testing.T) {
 	src := `$START p | {} | u
-~~1-2-3 | {} | 0
+~~1,2,3 | {} | 0
 ` + balloonPath + `
 $END p`
 	if _, err := ParseString(src); err == nil {
@@ -115,7 +115,7 @@ $END p`
 
 func TestParsePathMaskEmptyBodyError(t *testing.T) {
 	src := `$START p | {} | u
-~~10-10-20-5 | {} | 0
+~~10,10,20,5 | {} | 0
 $END p`
 	_, err := ParseString(src)
 	if err == nil {
@@ -128,7 +128,7 @@ $END p`
 
 func TestParsePathMaskInvalidStyleJSONError(t *testing.T) {
 	src := `$START p | {} | u
-~~10-10-20-5 | not-json | 0
+~~10,10,20,5 | not-json | 0
 ` + balloonPath + `
 $END p`
 	if _, err := ParseString(src); err == nil {
@@ -138,9 +138,9 @@ $END p`
 
 func TestParsePathMaskDuplicateIndexAgainstText(t *testing.T) {
 	src := `$START p | {} | u
->>10-10-20-3 | {} | 0
+>>10,10,20,3 | {} | 0
 hi
-~~10-10-20-5 | {} | 0
+~~10,10,20,5 | {} | 0
 ` + balloonPath + `
 $END p`
 	_, err := ParseString(src)
@@ -151,8 +151,8 @@ $END p`
 
 func TestParsePathMaskDuplicateIndexAgainstMask(t *testing.T) {
 	src := `$START p | {} | u
-==10-10-20-5 | {} | 0
-~~10-10-20-5 | {} | 0
+==10,10,20,5 | {} | 0
+~~10,10,20,5 | {} | 0
 ` + balloonPath + `
 $END p`
 	_, err := ParseString(src)
@@ -163,9 +163,9 @@ $END p`
 
 func TestParsePathMaskDuplicateIndexAgainstPathMask(t *testing.T) {
 	src := `$START p | {} | u
-~~10-10-20-5 | {} | 0
+~~10,10,20,5 | {} | 0
 ` + balloonPath + `
-~~30-30-20-5 | {} | 0
+~~30,30,20,5 | {} | 0
 ` + balloonPath + `
 $END p`
 	_, err := ParseString(src)
@@ -176,7 +176,7 @@ $END p`
 
 func TestParsePathMaskInvalidSyntaxError(t *testing.T) {
 	src := `$START p | {} | u
-~~10-10-20-5 | {} | 0
+~~10,10,20,5 | {} | 0
 not a path at all !!
 $END p`
 	_, err := ParseString(src)
@@ -187,7 +187,7 @@ $END p`
 
 func TestParsePathMaskMultipleSubpathsError(t *testing.T) {
 	src := `$START p | {} | u
-~~10-10-20-5 | {} | 0
+~~10,10,20,5 | {} | 0
 M0,0 L10,10 Z M20,20 L30,30 Z
 $END p`
 	_, err := ParseString(src)

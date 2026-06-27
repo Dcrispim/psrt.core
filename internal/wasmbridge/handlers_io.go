@@ -52,6 +52,19 @@ func HandleLoadSource() js.Func {
 	})
 }
 
+// HandleConvertLegacyDocument rewrites raw .psrt text written before the
+// comma coordinate separator (hyphen-separated >>/==/~~ headers) into the
+// current grammar, so it can be fed into parse/parseFast.
+func HandleConvertLegacyDocument() js.Func {
+	return wrapString(func(args []js.Value) (string, error) {
+		raw, err := stringArg(args, 0)
+		if err != nil {
+			return "", err
+		}
+		return psrt.ConvertLegacyDocument(raw)
+	})
+}
+
 func HandleStringify() js.Func {
 	return wrap(func(args []js.Value) ([]byte, error) {
 		b, err := bytesArg(args, 0)

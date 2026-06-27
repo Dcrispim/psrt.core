@@ -71,7 +71,7 @@ func TestMergePageDocumentPSRT(t *testing.T) {
 		t.Fatal(err)
 	}
 	fragment := `$START intro | {} | https://example.com/b.jpg
->>10-20-80-2 | {} | 0
+>>10,20,80,2 | {} | 0
 new line
 $END intro
 $FONTS

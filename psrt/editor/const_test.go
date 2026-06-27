@@ -10,7 +10,7 @@ import (
 func docWithLiteralColor(t *testing.T) psrt.Document {
 	t.Helper()
 	const src = `$START p1 | {"backGround":"#1DB954"} | https://a.example/1.png
-    >>10-10-80-1 | {"color":"#1DB954"} | 0
+    >>10,10,80,1 | {"color":"#1DB954"} | 0
     Spotify green
 $END p1
 `

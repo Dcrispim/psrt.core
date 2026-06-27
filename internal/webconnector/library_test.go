@@ -14,11 +14,11 @@ func TestScanLibraryProjects(t *testing.T) {
 	}
 	psrtPath := filepath.Join(sub, "cap1.psrt")
 	content := `$START p1 | {} | https://x/a.png
->>1-2-3-4 | {} | 0
+>>1,2,3,4 | {} | 0
 hi
 $END p1
 $START p2 | {} | https://x/b.png
->>1-2-3-4 | {} | 0
+>>1,2,3,4 | {} | 0
 bye
 $END p2
 `

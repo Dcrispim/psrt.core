@@ -9,6 +9,7 @@ func Register(exports js.Value) {
 	exports.Set("parse", HandleParse())
 	exports.Set("parseFast", HandleParseFast())
 	exports.Set("loadSource", HandleLoadSource())
+	exports.Set("convertLegacyDocument", HandleConvertLegacyDocument())
 	exports.Set("stringify", HandleStringify())
 	exports.Set("formatDocument", HandleFormatDocument())
 	exports.Set("configure", HandleConfigure())

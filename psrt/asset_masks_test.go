@@ -13,7 +13,14 @@ func TestLoadAssetMaskHeights(t *testing.T) {
 	if err != nil {
 		t.Skip(err)
 	}
-	doc, err := Parse(bytes.NewReader(data))
+	// This fixture predates the comma coordinate separator (hyphen-separated
+	// headers); run it through the legacy converter before parsing, same as
+	// any real legacy .psrt would need.
+	converted, err := ConvertLegacyDocument(string(data))
+	if err != nil {
+		t.Fatal(err)
+	}
+	doc, err := Parse(bytes.NewReader([]byte(converted)))
 	if err != nil {
 		t.Fatal(err)
 	}

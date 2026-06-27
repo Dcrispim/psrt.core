@@ -10,9 +10,9 @@ import (
 func sampleDoc(t *testing.T) psrt.Document {
 	t.Helper()
 	const src = `$START p1 | {"backGround":"#111"} | https://a.example/1.png
-    >>10-10-80-1 | {"color":"#fff"} | 0
+    >>10,10,80,1 | {"color":"#fff"} | 0
     hello
-    >>20-20-80-1 | {"color":"#aaa"} | 1
+    >>20,20,80,1 | {"color":"#aaa"} | 1
     world
 $END p1
 

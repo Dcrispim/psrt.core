@@ -57,7 +57,7 @@ Syntax:
 
 --page     Page name from $START … $END.
 --index    The numeric id in the text header (>> … | index), NOT a line number.
-           Example: >>11.6-56-11-77-3 | {...} | 1  →  --index=1
+           Example: >>11.65,70.01,25.5,3 | {...} | 1  →  --index=1
 
 Subcommands:
   set-content     Replace or append body text (--content, optional --append)
@@ -73,7 +73,7 @@ Subcommands:
 
 Reorder vs position:
   reorder-*     Changes the order of blocks in the .psrt file.
-  position-*    Changes >> X-Y-Width-TextSize coordinates on the canvas.
+  position-*    Changes >> X,Y,Width,TextSize coordinates on the canvas.
 
 Style --value accepts JSON literals or bare tokens (PowerShell-friendly):
   --key=color --value=#fff
