@@ -205,8 +205,11 @@ func writePathMask(b *strings.Builder, m *PathMask, consts map[string]string) er
 		b.WriteString(m.ImageRef)
 	}
 	b.WriteByte('\n')
-	for _, line := range svgpath.SplitCommands(m.Path) {
-		b.WriteString(line)
+	commands := svgpath.SplitCommands(m.Path)
+	perLine := formatOptions.PathCommandsPerLine
+	for i := 0; i < len(commands); i += perLine {
+		end := min(i+perLine, len(commands))
+		b.WriteString(strings.Join(commands[i:end], " "))
 		b.WriteByte('\n')
 	}
 	return nil

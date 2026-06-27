@@ -11,6 +11,7 @@ func Register(exports js.Value) {
 	exports.Set("loadSource", HandleLoadSource())
 	exports.Set("stringify", HandleStringify())
 	exports.Set("formatDocument", HandleFormatDocument())
+	exports.Set("configure", HandleConfigure())
 
 	exports.Set("addConst", HandleAddConst())
 	exports.Set("removeConst", HandleRemoveConst())
