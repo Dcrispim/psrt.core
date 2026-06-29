@@ -19,7 +19,8 @@ func HandleResolveDocument() js.Func {
 		if err != nil {
 			return nil, err
 		}
-		resolved := compilesvg.ResolveDocument(doc)
+		// Keep @type:render@ tokens so interactive readers (react-image) render them.
+		resolved := compilesvg.ResolveDocumentKeepInteractive(doc)
 		return exportDocJSON(resolved)
 	})
 }
@@ -34,7 +35,7 @@ func HandleResolveDocumentStrict() js.Func {
 		if err != nil {
 			return nil, err
 		}
-		resolved, err := compilesvg.ResolveDocumentStrict(doc)
+		resolved, err := compilesvg.ResolveDocumentStrictKeepInteractive(doc)
 		if err != nil {
 			return nil, err
 		}

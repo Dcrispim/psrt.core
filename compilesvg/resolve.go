@@ -7,9 +7,19 @@ import (
 	"github.com/Dcrispim/psrt.core/psrt"
 )
 
-// ResolveDocument expands all @const@ placeholders in styles, content, and URLs.
+// ResolveDocument expands all @const@ placeholders in styles, content, and URLs,
+// collapsing interactive consts to their render text (universal SVG/HTML output).
 func ResolveDocument(doc psrt.Document) psrt.Document {
-	consts := doc.Consts
+	return resolveDoc(doc, psrt.ConstsWithInteractive(doc.Consts, doc.IConst))
+}
+
+// ResolveDocumentKeepInteractive expands plain consts but leaves @type:render@
+// tokens intact, for interactive readers (e.g. react-image) that render them.
+func ResolveDocumentKeepInteractive(doc psrt.Document) psrt.Document {
+	return resolveDoc(doc, doc.Consts)
+}
+
+func resolveDoc(doc psrt.Document, consts map[string]string) psrt.Document {
 	if len(consts) == 0 {
 		return doc
 	}
@@ -48,7 +58,15 @@ func ResolveDocument(doc psrt.Document) psrt.Document {
 
 // ResolveDocumentStrict is like ResolveDocument but returns an error on invalid style JSON.
 func ResolveDocumentStrict(doc psrt.Document) (psrt.Document, error) {
-	consts := doc.Consts
+	return resolveDocStrict(doc, psrt.ConstsWithInteractive(doc.Consts, doc.IConst))
+}
+
+// ResolveDocumentStrictKeepInteractive is ResolveDocumentKeepInteractive with strict style validation.
+func ResolveDocumentStrictKeepInteractive(doc psrt.Document) (psrt.Document, error) {
+	return resolveDocStrict(doc, doc.Consts)
+}
+
+func resolveDocStrict(doc psrt.Document, consts map[string]string) (psrt.Document, error) {
 	if len(consts) == 0 {
 		return doc, nil
 	}
