@@ -16,8 +16,28 @@ type Document struct {
 
 	Consts map[string]string `json:"consts"`
 
+	// IConst holds interactive $CONSTS entries (`@type:render | value`), keyed by the
+	// reference token `type:render` used as `@type:render@` in bodies.
+	IConst map[string]InteractiveConst `json:"iConst,omitempty"`
+
 	// Sources maps original asset URLs/paths to embedded data: URIs ($SOURCE block).
 	Sources map[string]string `json:"sources,omitempty"`
+
+}
+
+
+
+// InteractiveConst is a behavioural $CONSTS entry. Type selects a renderer/handler
+// (e.g. link, desc); Render is the inline text shown in place; Value is the handler
+// payload (URL, modal content, …). The core is agnostic to the meaning of Type and
+// Value — only renderers interpret them, so new directives need no core change.
+type InteractiveConst struct {
+
+	Type   string `json:"type"`
+
+	Render string `json:"render"`
+
+	Value  string `json:"value"`
 
 }
 

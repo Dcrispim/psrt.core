@@ -27,14 +27,23 @@ func FormatPSRT(doc Document, compact bool) ([]byte, error) {
 		}
 		b.WriteString("$ENDFONTS\n")
 	}
-	if len(doc.Consts) > 0 {
-		keys := sortedStringKeys(doc.Consts)
+	if len(doc.Consts) > 0 || len(doc.IConst) > 0 {
 		b.WriteString("$CONSTS\n")
-		for _, k := range keys {
+		for _, k := range sortedStringKeys(doc.Consts) {
 			b.WriteString("@ ")
 			b.WriteString(k)
 			b.WriteString(pipeSep)
 			b.WriteString(doc.Consts[k])
+			b.WriteByte('\n')
+		}
+		for _, k := range sortedIConstKeys(doc.IConst) {
+			ic := doc.IConst[k]
+			b.WriteString("@")
+			b.WriteString(ic.Type)
+			b.WriteString(":")
+			b.WriteString(ic.Render)
+			b.WriteString(pipeSep)
+			b.WriteString(ic.Value)
 			b.WriteByte('\n')
 		}
 		b.WriteString("$ENDCONSTS\n")
@@ -225,6 +234,15 @@ func formatCoordQuad(x, y, w, ts float64) string {
 }
 
 func sortedStringKeys(m map[string]string) []string {
+	keys := make([]string, 0, len(m))
+	for k := range m {
+		keys = append(keys, k)
+	}
+	sort.Strings(keys)
+	return keys
+}
+
+func sortedIConstKeys(m map[string]InteractiveConst) []string {
 	keys := make([]string, 0, len(m))
 	for k := range m {
 		keys = append(keys, k)

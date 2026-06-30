@@ -79,6 +79,7 @@ func ParseTolerant(r io.Reader) (Document, []ParseError) {
 func parseDocument(r io.Reader, opts parseOptions) (Document, error) {
 	var doc Document
 	doc.Consts = make(map[string]string)
+	doc.IConst = make(map[string]InteractiveConst)
 	doc.Sources = make(map[string]string)
 
 	sc := newLineScanner(r)
@@ -116,6 +117,12 @@ func parseDocument(r io.Reader, opts parseOptions) (Document, error) {
 			}
 			s := strings.TrimSpace(line)
 			if s == "" {
+				continue
+			}
+			if isInteractiveConstLine(s) {
+				if err := parseInteractiveConstLine(s, doc.IConst, lineNo); err != nil {
+					return doc, fmt.Errorf("line %d: %w", lineNo, err)
+				}
 				continue
 			}
 			if err := parseConstLine(s, doc.Consts, lineNo); err != nil {
@@ -623,6 +630,41 @@ func parseConstLine(line string, dst map[string]string, lineNo int) error {
 		return fmt.Errorf("duplicate const %q", key)
 	}
 	dst[key] = val
+	return nil
+}
+
+// isInteractiveConstLine reports whether a $CONSTS line declares a behavioural
+// const (`@type:render | value`). The marker is a `:` in the key part (before the
+// first " | "); plain consts never carry a colon in the key, only in the value.
+func isInteractiveConstLine(line string) bool {
+	s := strings.TrimSpace(strings.TrimPrefix(strings.TrimSpace(line), "@"))
+	if idx := strings.Index(s, pipeSep); idx >= 0 {
+		s = s[:idx]
+	}
+	return strings.Contains(s, ":")
+}
+
+// parseInteractiveConstLine parses `@type:render | value` and stores it keyed by
+// the reference token `type:render` (used as `@type:render@` in bodies).
+func parseInteractiveConstLine(line string, dst map[string]InteractiveConst, lineNo int) error {
+	s := strings.TrimSpace(strings.TrimPrefix(strings.TrimSpace(line), "@"))
+	idx := strings.Index(s, pipeSep)
+	if idx < 0 {
+		return fmt.Errorf("interactive const must use %q between key and value: %q", pipeSep, line)
+	}
+	key := strings.TrimSpace(s[:idx])
+	val := strings.TrimSpace(s[idx+len(pipeSep):])
+	ci := strings.Index(key, ":")
+	typ := strings.TrimSpace(key[:ci])
+	render := strings.TrimSpace(key[ci+1:])
+	if typ == "" || render == "" {
+		return fmt.Errorf("interactive const needs %q with non-empty type and render", "type:render")
+	}
+	token := typ + ":" + render
+	if _, exists := dst[token]; exists {
+		return fmt.Errorf("duplicate interactive const %q", token)
+	}
+	dst[token] = InteractiveConst{Type: typ, Render: render, Value: val}
 	return nil
 }
 

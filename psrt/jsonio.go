@@ -13,6 +13,9 @@ func ParseJSON(b []byte) (Document, error) {
 	if doc.Consts == nil {
 		doc.Consts = make(map[string]string)
 	}
+	if doc.IConst == nil {
+		doc.IConst = make(map[string]InteractiveConst)
+	}
 	if doc.Sources == nil {
 		doc.Sources = make(map[string]string)
 	}
